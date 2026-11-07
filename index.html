@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Roofing, Wimborne and Ferndown (example website)</title>
+<meta name="description" content="Example website for a made-up roofing firm in Wimborne and Ferndown, Dorset. Built by Tom Fisher to show local trades what they could have.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2b3036">
+<link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="preload" as="image" href="assets/hero-roofer-800.webp" imagesrcset="assets/hero-roofer-800.webp 800w, assets/hero-roofer.webp 1600w" imagesizes="(min-width:1180px) 45vw, 100vw" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" id="wf" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@500..800&family=Lexend:wght@400..800&display=swap" media="print">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@500..800&family=Lexend:wght@400..800&display=swap"></noscript>
+<style>
+/* metric-matched fallbacks: text keeps its line breaks while the web fonts load (no layout shift) */
+@font-face{font-family:"Epilogue Fallback";src:local("Arial Bold"),local("Arial-BoldMT");font-weight:500 800;size-adjust:93%}
+@font-face{font-family:"Lexend Fallback";src:local("Arial"),local("ArialMT");font-weight:400 600;size-adjust:107.7%}
+@font-face{font-family:"Lexend Fallback";src:local("Arial Bold"),local("Arial-BoldMT");font-weight:700 800;size-adjust:106.7%}
+:root{
+  --work:#2b3036;--clay:#8e3a22;--clay-deep:#6d2a17;--on-clay:#fff;--on-clay-soft:#f8e1d7;--lead:#2b3036;--coal:#1d2125;--pale:#c9cdd1;--lime:#f5f4f1;
+  --paper:#f5f4f1;--wash:#e9e6e0;--ink:#1d2125;--muted:#4b535c;--rule:#1d2125;--leader:#8b9198;--link:#8e3a22;--head:#1d2125;
+  --wall:#e4e1db;--glass:#f5f4f1;--key:#1d2125;--joint:#b4583c;
+  --chip-on:#1d2125;--chip-on-ink:#fff;--field:#fff;--field-ink:#1d2125;--send:#1d2125;--send-ink:#fff;
+  --m-land:#efede8;--m-wood:#d5ddd0;--m-heath:#e6dfd2;--m-cont:#b9a58c;--m-grid:#d9d6cf;--m-tree:#5f7a5f;--m-water:#4f86ab;--m-road:#bdb7ac;--m-a:#5d656e;--m-a-case:#1d2125;--m-wname:#2f6487;--m-area:#46634a;--m-blend:multiply;--m-pw:8;--m-po:.85;--m-patch:#8e3a22;--pin:#1d2125;--pin-label:#1d2125;--halo:#efede8;--sel-bg:#8e3a22;--sel-ink:#fff;
+  --display:"Epilogue","Epilogue Fallback","Segoe UI",system-ui,sans-serif;
+  --body:"Lexend","Lexend Fallback","Segoe UI",system-ui,sans-serif;
+  --gutter:max(clamp(16px,3.6vw,48px),calc((100vw - 92rem)/2 + 48px));
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --work:#181b1f;--paper:#22272c;--wash:#2b3036;--ink:#ecebe7;--muted:#b3b9bf;--rule:#ecebe7;--leader:#5d656e;--link:#f3ac92;--head:#fff;
+  --wall:#262b30;--glass:#22272c;--key:#ecebe7;--joint:#b4583c;
+  --chip-on:#fff;--chip-on-ink:#1d2125;--field:#22272c;--field-ink:#ecebe7;--send:#f5f4f1;--send-ink:#1d2125;
+  --m-land:#1e2327;--m-wood:#22302a;--m-heath:#29291f;--m-cont:#7d6c55;--m-grid:#252a2f;--m-tree:#8fb08f;--m-water:#6fa3c4;--m-road:#4d535a;--m-a:#9aa3ac;--m-a-case:#0e1012;--m-wname:#8fc0de;--m-area:#a9c4ad;--m-blend:normal;--m-pw:6;--m-po:.95;--m-patch:#e0795a;--pin:#f3ac92;--pin-label:#ecebe7;--halo:#1e2327;--sel-bg:#f3ac92;--sel-ink:#1d2125;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --work:#181b1f;--paper:#22272c;--wash:#2b3036;--ink:#ecebe7;--muted:#b3b9bf;--rule:#ecebe7;--leader:#5d656e;--link:#f3ac92;--head:#fff;
+  --wall:#262b30;--glass:#22272c;--key:#ecebe7;--joint:#b4583c;
+  --chip-on:#fff;--chip-on-ink:#1d2125;--field:#22272c;--field-ink:#ecebe7;--send:#f5f4f1;--send-ink:#1d2125;
+  --m-land:#1e2327;--m-wood:#22302a;--m-heath:#29291f;--m-cont:#7d6c55;--m-grid:#252a2f;--m-tree:#8fb08f;--m-water:#6fa3c4;--m-road:#4d535a;--m-a:#9aa3ac;--m-a-case:#0e1012;--m-wname:#8fc0de;--m-area:#a9c4ad;--m-blend:normal;--m-pw:6;--m-po:.95;--m-patch:#e0795a;--pin:#f3ac92;--pin-label:#ecebe7;--halo:#1e2327;--sel-bg:#f3ac92;--sel-ink:#1d2125;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scrollbar-color:var(--clay) var(--paper);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1.125rem/1.55 var(--body);caret-color:var(--clay);overflow-x:clip}
+::selection{background:var(--clay);color:#fff}
+img,svg{display:block;max-width:100%}
+p,h1,h2,h3,dl,dd,figure,blockquote,ul{margin:0;padding:0}
+ul{list-style:none}
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-.02em;text-wrap:balance}
+h2{font-size:clamp(2.1rem,4.6vw,3.6rem);line-height:1.02;color:var(--head)}
+a{color:var(--link);text-decoration-thickness:2px;text-underline-offset:.2em}
+a:hover{text-decoration-thickness:4px}
+:focus-visible{outline:3px solid var(--lime);outline-offset:2px;box-shadow:0 0 0 2px var(--coal),0 0 0 8px var(--coal)}
+.wrap{padding-inline:max(var(--gutter),env(safe-area-inset-left,0px)) max(var(--gutter),env(safe-area-inset-right,0px))}
+.lede{color:var(--muted);max-width:58ch}
+.tag{display:inline-block;background:var(--coal);color:#fff;border:1px solid var(--rule);font-size:.8125rem;font-weight:700;line-height:1.3;padding:.12rem .45rem}
+.cap{position:absolute;left:0;bottom:0;background:var(--coal);color:#fff;font-size:.8125rem;line-height:1.3;padding:.25rem .55rem;pointer-events:none}
+
+/* banner + header */
+.banner{background:var(--coal);color:#fff;font-size:.8125rem;line-height:1.35}
+.banner .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:0 1.5rem;padding-block:.35rem}
+.banner a{color:#f3ac92;font-weight:700}
+.dsk{display:none}
+@media (max-width:760px){.banner .wrap{display:block}.banner a{margin-left:.25em}}
+@media (min-width:761px){.banner{font-size:.95rem}.dsk{display:inline}}
+.top{background:var(--lead);color:#fff}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:.6rem}
+.brand{display:flex;align-items:center;gap:.6rem;color:#fff;text-decoration:none;min-height:44px}
+.brand svg{width:46px;height:auto;flex:none}
+.brand b{white-space:nowrap;font:800 1.6rem/1 var(--display);letter-spacing:-.03em}
+.brand b span{font-weight:500;color:var(--pale)}
+.brand:hover{text-decoration:none}
+.nav{display:none;gap:1.6rem;align-items:center}
+.nav a{white-space:nowrap;color:#fff;font-weight:600;text-decoration:none;font-size:1.0625rem;padding-block:.4rem}
+.nav a:hover{text-decoration:underline;text-decoration-color:#f3ac92;text-decoration-thickness:3px}
+.nav .nq{background:var(--clay);padding:.55rem 1rem}
+.nav .nq:hover{background:var(--clay-deep);text-decoration:none}
+@media (min-width:600px){.nav{display:flex}.nav a:not(.nq){display:none}}
+@media (min-width:1180px){.nav a:not(.nq){display:inline}.top .wrap{padding-block:.8rem}.brand svg{width:54px}.brand b{font-size:1.85rem}}
+
+/* hero: slate courses, a chimney-stack photo with stepped lead flashing */
+.hero{--fw:36px;--steps:5;position:relative;color:#fff;display:grid;background:#22272c url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='384' height='72'%3E%3Crect x='-48' y='0' width='48' height='36' fill='%2322272c'/%3E%3Crect x='-48' y='0' width='1' height='33' fill='%23181b1e'/%3E%3Crect x='0' y='0' width='48' height='36' fill='%2323282d'/%3E%3Crect x='0' y='0' width='1' height='33' fill='%23181b1e'/%3E%3Crect x='48' y='0' width='48' height='36' fill='%23262b31'/%3E%3Crect x='48' y='0' width='1' height='33' fill='%23181b1e'/%3E%3Crect x='96' y='0' width='48' height='36' fill='%23212529'/%3E%3Crect x='96' y='0' width='1' height='33' fill='%23181b1e'/%3E%3Crect x='144' y='0' width='48' height='36' fill='%23272c32'/%3E%3Crect x='144' y='0' width='1' height='33' fill='%23181b1e'/%3E%3Crect x='192' y='0' width='48' height='36' fill='%2324292e'/%3E%3Crect x='192' y='0' width='1' height='33' fill='%23181b1e'/%3E%3Crect x='240' y='0' width='48' height='36' fill='%23202428'/%3E%3Crect x='240' y='0' width='1' height='33' fill='%23181b1e'/%3E%3Crect x='288' y='0' width='48' height='36' fill='%23252a30'/%3E%3Crect x='288' y='0' width='1' height='33' fill='%23181b1e'/%3E%3Crect x='336' y='0' width='48' height='36' fill='%2322272c'/%3E%3Crect x='336' y='0' width='1' height='33' fill='%23181b1e'/%3E%3Crect x='0' y='33' width='384' height='3' fill='%2316191c'/%3E%3Crect x='0' y='0' width='384' height='1' fill='%233a4047' fill-opacity='.55'/%3E%3Crect x='-24' y='36' width='48' height='36' fill='%23212529'/%3E%3Crect x='-24' y='36' width='1' height='33' fill='%23181b1e'/%3E%3Crect x='24' y='36' width='48' height='36' fill='%23272c32'/%3E%3Crect x='24' y='36' width='1' height='33' fill='%23181b1e'/%3E%3Crect x='72' y='36' width='48' height='36' fill='%2324292e'/%3E%3Crect x='72' y='36' width='1' height='33' fill='%23181b1e'/%3E%3Crect x='120' y='36' width='48' height='36' fill='%23202428'/%3E%3Crect x='120' y='36' width='1' height='33' fill='%23181b1e'/%3E%3Crect x='168' y='36' width='48' height='36' fill='%23252a30'/%3E%3Crect x='168' y='36' width='1' height='33' fill='%23181b1e'/%3E%3Crect x='216' y='36' width='48' height='36' fill='%2322272c'/%3E%3Crect x='216' y='36' width='1' height='33' fill='%23181b1e'/%3E%3Crect x='264' y='36' width='48' height='36' fill='%2323282d'/%3E%3Crect x='264' y='36' width='1' height='33' fill='%23181b1e'/%3E%3Crect x='312' y='36' width='48' height='36' fill='%23262b31'/%3E%3Crect x='312' y='36' width='1' height='33' fill='%23181b1e'/%3E%3Crect x='360' y='36' width='48' height='36' fill='%23212529'/%3E%3Crect x='360' y='36' width='1' height='33' fill='%23181b1e'/%3E%3Crect x='0' y='69' width='384' height='3' fill='%2316191c'/%3E%3Crect x='0' y='36' width='384' height='1' fill='%233a4047' fill-opacity='.55'/%3E%3C/svg%3E") 0 0/384px 72px}
+.hero-photo{position:relative;margin:0 0 0 var(--fw);height:min(28svh,226px);background:#3a3f45}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:62% 30%}
+.hero-photo .cap{left:auto;right:0;bottom:auto;top:0}
+.flash{position:absolute;top:0;bottom:0;right:100%;width:var(--fw);filter:drop-shadow(-2px 3px 3px rgba(0,0,0,.55));pointer-events:none}
+.flash i{position:absolute;inset:0;background:linear-gradient(180deg,rgba(236,240,243,.5) 0 2px,transparent 2px) 0 0/100% calc(100% / var(--steps)),linear-gradient(90deg,#59616a,#8b9198 62%,#a9afb5);clip-path:polygon(100% 0,100% 100%,0 100%,0% 80%,20% 80%,20% 60%,40% 60%,40% 40%,60% 40%,60% 20%,80% 20%,80% 0)}
+.panel{position:relative;padding:1.05rem var(--gutter) 1.6rem;display:flex;flex-direction:column;gap:.75rem;min-width:0}
+h1{font-size:clamp(2.35rem,10.2vw,4.75rem);line-height:.98;letter-spacing:-.035em;color:#fff}
+.where{color:#d5d9dd;font-size:1.0625rem;line-height:1.4;max-width:34rem}
+.num{display:block;font:800 min(12.4vw,5rem)/1 var(--display);letter-spacing:-.03em;color:#fff;text-decoration:none;white-space:nowrap;width:max-content;max-width:100%;font-variant-numeric:tabular-nums}
+.num::after{content:"";display:block;height:9px;width:62%;margin-top:.5rem;background:repeating-linear-gradient(90deg,#b4583c 0 34px,#6d2a17 34px 36px);box-shadow:0 2px 3px rgba(0,0,0,.45)}
+.num:hover{text-decoration:underline;text-decoration-thickness:4px;text-underline-offset:.12em}
+.trust{display:flex;flex-wrap:wrap;gap:.15rem 1.3rem;color:#d5d9dd;font-size:.98rem;line-height:1.4}
+.trust li{position:relative;padding-left:1.05rem}
+.trust li::before{content:"";position:absolute;left:1px;top:.5em;width:7px;height:7px;background:#b4583c;transform:rotate(45deg)}
+.hero .ql{display:inline-flex;align-items:center;gap:.45rem;color:#f3ac92;font-weight:700;align-self:flex-start;padding-block:.5rem}
+.hero .ql svg{width:18px;height:12px;flex:none;transition:transform .2s cubic-bezier(.16,1,.3,1)}
+.hero .ql:hover svg{transform:translateX(4px)}
+@media (min-width:600px){.hero{--fw:48px}.hero-photo{height:min(40svh,360px)}.hero-photo img{object-position:62% 6%}}
+@media (min-width:1180px){
+  .hero{--fw:76px;--steps:8;grid-template-columns:minmax(0,1fr) minmax(0,45%);min-height:clamp(560px,calc(100svh - 101px),780px)}
+  .hero-photo{grid-column:2;grid-row:1;height:auto}
+  .hero-photo img{position:absolute;inset:0;object-position:68% 40%}
+  .hero-photo .cap{top:auto;bottom:0}
+  .flash i{clip-path:polygon(100% 0,100% 100%,0 100%,0% 87.5%,12.5% 87.5%,12.5% 75%,25% 75%,25% 62.5%,37.5% 62.5%,37.5% 50%,50% 50%,50% 37.5%,62.5% 37.5%,62.5% 25%,75% 25%,75% 12.5%,87.5% 12.5%,87.5% 0)}
+  .panel{grid-column:1;grid-row:1;align-self:center;padding:2.4rem clamp(2rem,4vw,4rem) 2.6rem var(--gutter);gap:1.05rem}
+  h1{font-size:clamp(2.9rem,4.4vw,4.6rem)}
+  .num{font-size:clamp(3rem,4vw,4.1rem)}
+}
+
+/* stepped lead flashing edge (prices, quote band, close) */
+.edge{position:absolute;left:0;right:0;bottom:100%;height:46px;display:flex;align-items:flex-end;pointer-events:none}
+.edge i{flex:1;height:46px;background:var(--clay);border-top:4px solid var(--pale);margin-right:-1px}
+.edge svg{flex:none;width:158px;height:46px;max-width:none}
+.edge .f{fill:var(--clay)}
+.edge .l{fill:none;stroke:var(--pale);stroke-width:6;stroke-linejoin:miter}
+@media (min-width:1180px){.edge{height:70px}.edge i{height:70px;border-top-width:6px}.edge svg{width:240px;height:70px}}
+
+/* storm strip */
+.storm{background:var(--lead);color:#fff;border-top:6px solid var(--pale)}
+.storm .wrap{display:grid;gap:.3rem 1rem;padding-block:1rem}
+.storm b{font:800 clamp(1.45rem,2.4vw,2rem)/1.05 var(--display);letter-spacing:-.02em}
+.storm p{max-width:64ch;font-size:1.0625rem;line-height:1.4}
+.storm p{color:#d5d9dd}
+.storm a{font:800 clamp(1.8rem,2.8vw,2.4rem)/1 var(--display);color:#fff;text-decoration:none;white-space:nowrap;font-variant-numeric:tabular-nums}
+.storm a:hover{text-decoration:underline}
+@media (min-width:900px){.storm .wrap{grid-template-columns:minmax(0,1.1fr) minmax(0,1.3fr) auto;align-items:center;gap:2rem}}
+
+/* show us where */
+.where-sec{padding-block:clamp(2.5rem,6vw,5rem);display:grid;gap:1.4rem}
+.ws-head{display:grid;gap:.7rem}
+.house{min-width:0}
+.stage{position:relative;padding-top:12px}
+.house svg.dw{width:100%;height:auto}
+.dw .k{fill:none;stroke:var(--key);stroke-width:2;stroke-linejoin:round}
+.dw .kf{stroke:var(--key);stroke-width:2;stroke-linejoin:round}
+.dw .wall{fill:var(--wall)}
+.dw .gl{fill:var(--glass)}
+.dw .roof{fill:url(#tiles)}
+.dw .clay{fill:#8e3a22}.dw .deep{fill:#6d2a17}.dw .lead{fill:#3a4047}.dw .pale{fill:#c9cdd1}.dw .felt{fill:#e9e1d3}
+.dw .bars{fill:none;stroke:var(--key);stroke-width:2}
+.dw .mort{fill:none;stroke:#b98a74;stroke-width:1.5}
+.dw .hatch{fill:none;stroke:var(--leader);stroke-width:2}
+.hs{position:absolute;width:44px;height:44px;margin:-16px 0 0 -22px;display:grid;place-items:center;background:none;border:0;padding:0;cursor:pointer;color:var(--ink);font:700 .95rem/1.1 var(--body)}
+.hs i{width:26px;height:26px;background:var(--paper);border:3px solid var(--clay);transition:transform .15s ease-out}
+.hs:hover i{transform:scale(1.15)}
+.hs[aria-pressed="true"] i{background:var(--clay);border-color:var(--coal);transform:scale(1.2)}
+.hs span{position:absolute;left:40px;top:50%;transform:translateY(-50%);white-space:nowrap;background:color-mix(in srgb,var(--paper) 88%,transparent);padding:.1em .35em;display:none}
+.hs.lft span{left:auto;right:40px}
+.hs[aria-pressed="true"] span{background:var(--clay);color:#fff}
+@media (min-width:760px){.hs span{display:block}.hs i{width:22px;height:22px}}
+.spots{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.9rem}
+.spots button{min-height:44px;padding:.3rem .8rem;border:2px solid var(--rule);background:none;color:var(--ink);font:700 1rem/1.2 var(--body);cursor:pointer}
+.spots button:hover{background:var(--wash)}
+.spots button[aria-pressed="true"]{background:var(--coal);color:#fff;border-color:var(--coal)}
+:root[data-theme="dark"] .spots button[aria-pressed="true"]{background:#fff;color:var(--coal);border-color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .spots button[aria-pressed="true"]{background:#fff;color:var(--coal);border-color:#fff}}
+@media (min-width:760px){.spots{display:none}}
+.fix{border-top:6px solid var(--clay);padding-top:1rem;display:grid;gap:.6rem;align-content:start}
+.fix h3{font-size:clamp(1.7rem,2.6vw,2.2rem);line-height:1.05;color:var(--head)}
+.fix .prob{color:var(--muted)}
+.fix .price{display:flex;align-items:baseline;gap:.45rem;margin-top:.2rem;color:var(--muted)}
+.fix .price b{font:800 clamp(2.4rem,4vw,3.2rem)/1 var(--display);letter-spacing:-.03em;color:var(--head);font-variant-numeric:tabular-nums}
+.fix a{font-weight:700;align-self:start;justify-self:start;padding-block:.5rem}
+.fix small{color:var(--muted);font-size:.9375rem}
+@media (min-width:900px){
+  .where-sec{grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);column-gap:clamp(2rem,5vw,4.5rem);row-gap:1.6rem;align-items:start}
+  .ws-head{grid-column:1/-1;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);column-gap:clamp(2rem,5vw,4.5rem);align-items:end}
+  .fix{position:sticky;top:1.5rem;margin-top:12px}
+}
+
+/* prices as courses */
+.prices{background:var(--wash)}
+.prices figure{position:relative;height:clamp(200px,30vw,380px);overflow:hidden;background:#3a3f45}
+.prices figure img{width:100%;height:100%;object-fit:cover;object-position:50% 55%}
+.prices figure .edge{bottom:0;height:46px}
+.prices figure .edge i{background:var(--wash)}
+.prices figure .edge .f{fill:var(--wash)}
+.prices figure .cap{bottom:auto;top:0}
+.course{padding-block:clamp(2rem,5vw,4rem) clamp(2.5rem,6vw,4.75rem);display:grid;gap:1.4rem}
+.course-head{display:grid;gap:.7rem}
+.course ul{border-top:3px solid var(--rule)}
+.course li{position:relative;display:grid;grid-template-columns:14px minmax(0,1fr) auto;column-gap:.85rem;row-gap:.2rem;padding:.9rem 0 1rem;border-bottom:2px solid var(--rule)}
+.course li::before{content:"";position:absolute;left:0;top:1.05rem;width:14px;height:18px;background:var(--clay);border-bottom:3px solid var(--clay-deep)}
+.course li>*{grid-column:2}
+.course li h3{font:700 1.1875rem/1.25 var(--body);letter-spacing:0;color:var(--ink);align-self:baseline}
+.course li .fr{grid-column:3;grid-row:1;white-space:nowrap;color:var(--muted);font-size:1rem;align-self:baseline}
+.course .fr b{margin-left:.3rem;font:800 clamp(1.85rem,3vw,2.5rem)/1 var(--display);letter-spacing:-.03em;color:var(--head);font-variant-numeric:tabular-nums}
+.course .fr em{font-style:normal;font-weight:700;color:var(--head)}
+.course li p{grid-column:2/4;color:var(--muted);font-size:1rem;line-height:1.4;max-width:60ch}
+.course li .t{grid-column:2/4;font-size:.9375rem;color:var(--muted)}
+.course li .t b{color:var(--ink);font-weight:700}
+.pnote{color:var(--muted);font-size:.9375rem}
+@media (min-width:1000px){
+  .course-head{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);column-gap:clamp(2rem,5vw,4.5rem);align-items:end}
+  .course-head h2{font-size:clamp(2.6rem,4.8vw,4rem)}
+  .course li{grid-template-columns:14px minmax(0,1fr) minmax(0,1.5fr) 10.5rem 11rem;align-items:baseline;column-gap:clamp(1rem,2.4vw,2rem)}
+  .course li h3{grid-column:2}
+  .course li p{grid-column:3;grid-row:1}
+  .course li .t{grid-column:4;grid-row:1}
+  .course li .fr{grid-column:5;justify-self:end}
+}
+
+/* work */
+.work{background:var(--work);color:#fff}
+.work .wrap{display:grid;gap:1.4rem;padding-block:clamp(2.5rem,6vw,5rem)}
+.work h2{color:#fff}
+.work .lede{color:#d5d9dd}
+.ba{position:relative;aspect-ratio:4/3;overflow:hidden;background:#3a3f45;user-select:none;touch-action:pan-y;margin-inline:calc(var(--gutter) * -1)}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ba .after{clip-path:inset(0 0 0 var(--pos,50%))}
+.ba .bar{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:6px;margin-left:-3px;background:var(--pale);pointer-events:none}
+.ba .grip{position:absolute;top:50%;left:50%;width:54px;height:54px;margin:-27px 0 0 -27px;background:var(--clay);color:#fff;display:grid;place-items:center;border:3px solid var(--pale)}
+.ba .grip svg{width:28px;height:28px}
+.ba .lab{position:absolute;top:0;background:var(--coal);color:#fff;font-weight:700;font-size:.9375rem;padding:.2rem .6rem;pointer-events:none}
+.ba .lb{left:0}.ba .la{right:0}
+.ba input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize}
+.ba input:focus-visible~.bar .grip{outline:3px solid var(--lime);outline-offset:2px;box-shadow:0 0 0 2px var(--coal),0 0 0 8px var(--coal)}
+.work-copy{display:flex;flex-direction:column;gap:.9rem;min-width:0}
+.facts div{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding-block:.6rem;border-bottom:2px solid #4b535c}
+.facts div:first-child{border-top:3px solid #fff}
+.facts dt{font-weight:700}
+.facts dd{color:#d5d9dd;text-align:right}
+@media (max-width:599px){.facts div{flex-direction:column;gap:0}.facts dd{text-align:left}}
+@media (min-width:900px){.work .wrap{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);column-gap:clamp(2rem,5vw,4.5rem);align-items:center}.ba{margin-inline:0}}
+
+/* patch */
+.patch{padding-block:clamp(2.5rem,6vw,5rem) calc(clamp(2.5rem,6vw,5rem) + 56px);display:grid;gap:1.25rem}
+.patch-head{display:flex;flex-direction:column;gap:.7rem;padding-inline:var(--gutter)}
+.mapwrap{position:relative;min-width:0}
+.map{position:relative;aspect-ratio:620/545;border-block:2px solid var(--rule);overflow:hidden;background:var(--m-land)}
+.note{color:var(--ink);font-size:.8125rem;line-height:1.3;padding:.4rem var(--gutter) 0;display:flex;flex-wrap:wrap;gap:0 .8rem}
+.lg{display:inline-flex;align-items:center;gap:.3rem;white-space:nowrap}
+.lg i{width:8px;height:8px;border-radius:50%;background:var(--pin)}
+.lg i.r{width:11px;height:11px;border-radius:0}
+.lg i.z{width:16px;height:10px;border-radius:0;background:color-mix(in srgb,var(--m-patch) 13%,transparent);border:2px solid var(--m-patch)}
+.sk{color:var(--muted)}
+@media (min-width:900px){.note{position:absolute;right:2px;bottom:2px;background:var(--paper);padding:.25rem .5rem;border:solid var(--rule);border-width:2px 0 0 2px}}
+.pin{position:absolute;min-height:44px;display:flex;align-items:center;background:none;border:0;padding:0;color:var(--pin-label);font:700 .875rem/1.1 var(--body);cursor:pointer;transform:translate(-22px,-22px)}
+.pin.lft{flex-direction:row-reverse;transform:translate(calc(-100% + 22px),-22px)}
+.pin i{flex:none;width:44px;height:44px;display:grid;place-items:center}
+.pin i::before{content:"";width:16px;height:16px;background:var(--pin);border:3px solid var(--halo);outline:2px solid var(--pin);transition:transform .15s ease-out}
+.pin span{margin-inline:-9px;padding:.08em .32em;background:color-mix(in srgb,var(--halo) 86%,transparent);white-space:nowrap}
+.pin:hover i::before{transform:scale(1.2)}
+.pin[aria-pressed="true"] span{background:var(--sel-bg);color:var(--sel-ink)}
+.pin[aria-pressed="true"] i::before{background:var(--sel-bg);transform:scale(1.25)}
+.pin.job i::before{width:10px;height:10px;border-radius:50%;border:0;outline:2px solid var(--halo);background:var(--pin)}
+.pin.job[aria-pressed="true"] i::before{width:15px;height:15px;background:var(--sel-bg)}
+.pin.out{flex-direction:column-reverse;transform:translate(-50%,calc(-100% + 22px));text-align:center}
+.pin.out i::before{background:transparent;border-color:transparent;border-radius:50%;outline-offset:-2px}
+.pin.out span{margin:0 0 -12px;white-space:normal;width:5.4em;line-height:1.15}
+.places{padding-inline:var(--gutter);min-width:0}
+.place{border-top:6px solid var(--clay);padding-top:.9rem;display:grid;gap:.6rem}
+.place h3{font-size:2rem;line-height:1;color:var(--head)}
+.place blockquote,.place>p:not(.who){font-size:1.25rem;line-height:1.38;max-width:32em}
+.who{display:flex;flex-wrap:wrap;gap:.2rem .7rem;align-items:center;color:var(--muted);font-size:1rem}
+.who b{color:var(--ink)}
+.stars{width:92px;height:17px;color:var(--clay)}
+:root[data-theme="dark"] .stars{color:var(--link)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .stars{color:var(--link)}}
+@media (min-width:900px){
+  .patch{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);padding-inline:var(--gutter);column-gap:clamp(2rem,5vw,4.5rem);row-gap:1.5rem;align-items:start;grid-template-rows:auto 1fr}
+  .mapwrap{grid-column:2;grid-row:1/3}
+  .map{border:2px solid var(--rule)}
+  .patch-head,.places{padding-inline:0}
+  .pin{font-size:1rem}
+}
+.m-cont,.m-grid,.m-tick,.m-mar,.m-north{display:none}
+.m-patch{stroke-dasharray:100;stroke-dashoffset:0}
+.draw .m-patch{animation:draw 1.8s cubic-bezier(.16,1,.3,1) both}
+@keyframes draw{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+
+/* quote band */
+.band{position:relative;background:var(--clay);color:#fff}
+.band>.edge,.close>.edge{z-index:2}
+.close>.edge i{background:var(--coal)}.close>.edge .f{fill:var(--coal)}
+.band .wrap{display:grid;gap:1.5rem;padding-block:clamp(2.5rem,6vw,4.75rem)}
+.band h2{color:#fff;font-size:clamp(2.2rem,5vw,3.9rem)}
+.band .pl{margin-top:.8rem;max-width:44ch;line-height:1.45;color:var(--on-clay-soft)}
+form{display:flex;flex-direction:column;gap:.95rem;min-width:0}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend,label.f{display:block;font-weight:700;padding:0;margin-bottom:.35rem}
+.opts{display:flex;flex-wrap:wrap;gap:.45rem}
+.opts input{position:absolute;opacity:0;width:1px;height:1px}
+.opts label{min-height:44px;display:flex;align-items:center;padding:.3rem .8rem;border:2px solid #fff;font-weight:700;cursor:pointer}
+.opts label:hover{background:rgba(255,255,255,.14)}
+.opts input:checked+label{background:#fff;color:var(--clay-deep)}
+.opts input:focus-visible+label{outline:3px solid var(--lime);outline-offset:2px;box-shadow:0 0 0 2px var(--coal),0 0 0 8px var(--coal)}
+input.t,textarea{width:100%;font:inherit;color:#1d2125;background:#fff;border:2px solid #fff;border-radius:0;padding:.65rem .75rem;caret-color:var(--clay)}
+textarea{min-height:6.25rem;resize:vertical}
+::placeholder{color:#5d656e;opacity:1}
+textarea[aria-invalid="true"]{border:4px solid var(--coal)}
+.send{font:700 1.1875rem/1.3 var(--body);background:var(--coal);color:#fff;border:0;min-height:56px;padding:.8rem 1rem;cursor:pointer}
+.send:hover{text-decoration:underline;text-underline-offset:.2em}
+.composed{font-size:1rem;line-height:1.4}
+.composed:empty{display:none}
+.composed q{display:block;quotes:none;background:#fff;color:#1d2125;border:2px solid #fff;padding:.55rem .7rem;margin-top:.35rem}
+@media (min-width:900px){.band .wrap{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);column-gap:clamp(2.5rem,6vw,5rem);align-items:start}}
+
+/* faq */
+.ask{padding-block:clamp(2.5rem,6vw,5rem) calc(clamp(2.5rem,6vw,5rem) + 56px);display:grid;gap:1.25rem}
+.ask details{border-bottom:2px solid var(--leader)}
+.ask details:first-child{border-top:3px solid var(--rule)}
+.ask summary{min-height:56px;display:flex;align-items:center;justify-content:space-between;gap:1rem;font-weight:700;font-size:1.1875rem;line-height:1.3;padding-block:.65rem;cursor:pointer;list-style:none}
+.ask summary::-webkit-details-marker{display:none}
+.ask summary::after{content:"";flex:none;width:18px;height:18px;background:linear-gradient(var(--link),var(--link)) center/100% 3px no-repeat,linear-gradient(var(--link),var(--link)) center/3px 100% no-repeat}
+.ask details[open] summary::after{background:linear-gradient(var(--link),var(--link)) center/100% 3px no-repeat}
+.ask details p{padding-bottom:1rem;color:var(--muted);max-width:60ch}
+@media (min-width:900px){.ask{grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);column-gap:clamp(2.5rem,6vw,5rem)}}
+
+/* close */
+.close{position:relative;background:var(--coal);color:#fff}
+.close .wrap{display:grid;gap:1.1rem;padding-block:clamp(2.5rem,6vw,4.75rem)}
+.close h2{color:#fff;font-size:clamp(2.2rem,5vw,3.9rem)}
+.close p{color:#d5d9dd;max-width:52ch}
+.close .price{font:800 clamp(1.7rem,3vw,2.5rem)/1.1 var(--display);letter-spacing:-.02em;color:#fff}
+.close a{color:#fff;font-weight:700}
+.reach{display:flex;flex-direction:column;gap:.3rem;font-size:1.1875rem}
+@media (min-width:900px){.close .wrap{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);column-gap:clamp(2.5rem,6vw,5rem);align-items:end}}
+footer{background:var(--coal);color:#bfc4c9;font-size:.9375rem;border-top:1px solid #3a4047}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.25rem 1.5rem;padding-block:1rem calc(5.25rem + env(safe-area-inset-bottom,0px))}
+@media (min-width:900px){footer .wrap{padding-bottom:1rem}}
+
+.callbar{position:fixed;inset-inline:0;bottom:0;z-index:20;display:flex;gap:6px;background:var(--coal);padding:6px max(6px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(6px,env(safe-area-inset-left,0px))}
+.callbar a{flex:1;min-height:52px;display:grid;place-items:center;font-weight:800;font-size:1.1875rem;text-decoration:none;color:var(--coal);background:var(--lime)}
+.callbar a+a{background:var(--clay);color:#fff}
+@media (min-width:900px){.callbar{display:none}}
+.demo-note{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:30;width:min(30rem,calc(100vw - 24px));background:var(--coal);color:#fff;border:2px solid var(--pale);padding:.55rem .8rem;font-size:1rem;line-height:1.35}
+.demo-note:empty{display:none}
+@media (min-width:900px){.demo-note{bottom:24px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hero .ql svg{transition:none}.draw .m-patch{animation:none}.pin i::before,.hs i{transition:none}}
+.sheet{display:block;width:100%;height:100%}.m-land{fill:var(--m-land)}.m-wood{fill:var(--m-wood)}.m-heath{fill:var(--m-heath)}.m-cont{fill:none;stroke:var(--m-cont);stroke-width:1.1;opacity:.5}.m-grid path{stroke:var(--m-grid);stroke-width:1;fill:none}.m-tree use{fill:var(--m-tree)}.m-tuft use{fill:none;stroke:var(--m-tree);stroke-width:1.2;stroke-linecap:round}.m-water{fill:none;stroke:var(--m-water);stroke-width:4;stroke-linecap:round}.m-stour{stroke-width:8}.m-thin{stroke-width:3}.m-road{fill:none;stroke:var(--m-road);stroke-width:3;stroke-linecap:round}.m-a-case{fill:none;stroke:var(--m-a-case);stroke-width:9;stroke-linecap:round}.m-a{fill:none;stroke:var(--m-a);stroke-width:6;stroke-linecap:round}.m-patch{fill:color-mix(in srgb,var(--m-patch) 13%,transparent);stroke:var(--m-patch);stroke-width:4;stroke-linejoin:round}.m-wname{font:500 19px var(--body);fill:var(--m-wname);letter-spacing:.04em}.m-area{font:500 17px var(--body);fill:var(--m-area);letter-spacing:.06em;text-anchor:middle}.m-shield{fill:var(--m-a);stroke:var(--m-a-case);stroke-width:1.5}.m-shield-t{font:700 18px var(--body);fill:#fff;text-anchor:middle}.m-tick{fill:none;stroke:var(--rule);stroke-width:2}.m-mar{font:700 19px var(--body);fill:var(--muted)}.m-n{text-anchor:middle}.m-north{fill:var(--muted)}
+</style>
+</head>
+<body id="top">
+
+<aside class="banner" aria-label="About this website"><div class="wrap">
+  <span><b>Example website.</b> Kestrel Roofing is a made-up business.</span>
+  <a href="#want">Want one<span class="dsk"> for your business</span>?</a>
+</div></aside>
+
+<header class="top"><div class="wrap">
+  <a class="brand" href="#top" aria-label="Kestrel Roofing, back to top"><svg viewBox="-2 -2 295 214" aria-hidden="true" focusable="false"><path fill="#e8866a" fill-rule="evenodd" d="M189.90451 35.8c-5.68001-4.8-13.56-7.64-19-8.88-2.76001-0.64-3.84-2.6-3.84-4.03999 0-0.84 1.4-1.64001 1.4-2.68-0.64-10.76-10.68001-20.20001-23.4-20.20001-13.32 0-22.56002 9.72-23.12001 20.48 0 0.8 1.19999 1.56 1.19999 2.40001 0 1.43999-1.28 3.28-3.83999 3.91999-5.92 1.36-13.72 4.28-19 9-26.64 23.16-88.88 73.92-100.28 81.12-0.48 0.92 6.24 12.6 7.2 13.47999 2.68-0.75999 20.2-15.43998 25.44001-18.31999-3.08 4.84-17.52 23-19.04001 25 1.6 2.28 8.52 7.840 10.72001 7.60001 3.36-3.44 19.56-20.68001 25.24-24.84001-2.84 5.8-16.6 26.08-18.48001 28.8 1.08 1.56 10.56 6.28 12.24001 6.11999 2.12-1.71998 17.44-22.71998 21.83999-27.31999-1.48 6.08-11.88 25.80001-13.12 28.68 1.48 1.68 10.32 1.27999 12.04 0.36 2.2-1.87999 6.28-9.2 9.8-14.2 10-14.08 25.79999-34.08 38.68-53.8 0.32 12.72 6.08 23.72 10.27999 30.6l-40.47999 63.48c-0.96 1.52-0.16 3.64 1.48 4.44l29.8 13.28c2.04001 0.88 4.19999-0.2 4.64-2.2l14.48-59.6 1.76001 1.44-11.08001 63.40001c-0.32001 1.63998 0.56 2.91998 2.12 3.35998 6.2 1.64002 13.2 2.36002 19.44001 2.36002 6.47999 0 13.72-0.88001 19.55999-2.36002 1.72-0.44 2.56-1.75998 2.32001-3.44l-10.88-61.55998 1.75999-1.28002 14.32001 57.68001c0.44 2 2.8 2.99999 4.64 2.16001l29.47999-12.92c1.76001-0.80001 2.48001-3.28 1.64-4.60001l-40.08-63.92c4.60001-7.83999 9.68001-18.88 9.92001-30.44 12.43999 18.96001 29.15999 40.16 38.59999 53.84 3.68001 5.40001 7.2 12.28 9.24001 14 1.92 1.19999 11.2 1.76001 12.44-0.23999-1.68001-4.88001-11.48001-22-13.12001-28.56002 5.12001 5.72001 18.76 24.20002 21.16002 27 1.19998 1.76001 12.19997-4.15998 13.35997-5.71998-3.07999-5.56001-16.27998-23.60001-18.87999-28.88001 5.92001 5.04 21.8 21.72 25.39998 24.88001 2.56 0.23999 9.28-5.64 10.56-7.44-3-4.60001-16.15998-20.2-18.56-25.16001 6 4.04 21.68002 17.24001 25.28 18.31999 1.12002-1.35998 7.20001-11.95999 7.24002-13.31999-24.92001-18.64-76.99999-61.2-100.51999-81.28zm-30.76001-0.48c-5.67999 5.84-11.03999 13.36-14.03999 22.04-3-8.76-9.08-16.28-14.04-21.6-3.20002-3.52-4.80001-7.44-4.48001-10.64 4.12001 2.56 10.88001 4.47999 13.12001 8l5.4 10.04 5.24-9.72c2.08-3.72 9.56-6 13.36-8.28 0.2 3.84-1.8 7.24-4.56001 10.16z"/></svg><b>Kestrel <span>Roofing</span></b></a>
+  <nav class="nav" aria-label="Main">
+    <a href="#where">Show us where</a><a href="#prices">Prices</a><a href="#work">Our work</a><a href="#patch">Our patch</a><a href="#faq">Questions</a><a class="nq" href="#quote">Get a quote</a>
+  </nav>
+</div></header>
+
+<main>
+<section class="hero" aria-labelledby="h1">
+  <figure class="hero-photo">
+    <img src="assets/hero-roofer.webp" srcset="assets/hero-roofer-800.webp 800w, assets/hero-roofer.webp 1600w" sizes="(min-width:1180px) 45vw, 100vw" width="1600" height="1066" alt="A roofer in a harness kneeling on a clay-tiled roof beside the scaffold, lifting old tiles to reach the battens." fetchpriority="high">
+    <span class="flash" aria-hidden="true"><i></i></span>
+    <figcaption class="cap">Illustrative photos</figcaption>
+  </figure>
+  <div class="panel">
+    <h1 id="h1">Slipped tiles, leaks and new roofs, fixed for good</h1>
+    <p class="where">Roofers based in Wimborne, covering Ferndown, Colehill, Corfe Mullen and West Parley.</p>
+    <a class="num" href="#quote" data-demo="call" aria-label="Call 01202 000000 (placeholder number)">01202 000000</a>
+    <ul class="trust" aria-label="About the firm">
+      <li>CompetentRoofer registered (example)</li>
+      <li>Fully insured (example)</li>
+      <li>5.0 from 39 Google reviews (sample)</li>
+    </ul>
+    <a class="ql" href="#where">Show us where it's leaking<svg viewBox="0 0 18 12" aria-hidden="true"><path d="M0 6h15M10.5 1.5 15.5 6l-5 4.5" fill="none" stroke="currentColor" stroke-width="2.2"/></svg></a>
+  </div>
+</section>
+<script>/* web fonts once the hero photo has painted (Safari: on load); metric-matched fallbacks keep the layout still */(function(){var w=document.getElementById("wf"),d=0,go=function(){if(!d){d=1;w.media="all"}},t=PerformanceObserver&&PerformanceObserver.supportedEntryTypes||[];if(t.indexOf("largest-contentful-paint")>-1){new PerformanceObserver(function(l){l.getEntries().forEach(function(e){if(e.element&&e.element.closest(".hero")&&e.element.tagName==="IMG")go()})}).observe({type:"largest-contentful-paint",buffered:true})}else addEventListener("load",go);setTimeout(go,2500)})()</script>
+
+<aside class="storm" aria-label="Storm damage"><div class="wrap">
+  <b>Storm damage or water through the ceiling?</b>
+  <p>Put a bucket under the drip and keep clear of a sagging ceiling. If water is near lights or sockets, switch off at the mains. Then call: we make it watertight first.</p>
+  <a href="#quote" data-demo="call" aria-label="Call 01202 000000 (placeholder number)">01202 000000</a>
+</div></aside>
+
+<section class="where-sec wrap" id="where" aria-labelledby="ws-h">
+  <div class="ws-head">
+    <h2 id="ws-h">Show us where it's leaking</h2>
+    <p class="lede">Tap the part of the roof that's giving you trouble. You'll see what we'd do about it and a starting price, before anyone climbs a ladder.</p>
+  </div>
+  <div class="house">
+    <div class="stage">
+    <svg class="dw" viewBox="0 0 800 520" role="img" aria-label="Drawing of a house: tiled roof with ridge and chimney, gutters at the eaves, a tiled porch over the front door and a flat-roofed extension on the right.">
+      <defs>
+        <pattern id="tiles" width="32" height="32" patternUnits="userSpaceOnUse"><rect width="32" height="32" fill="#8e3a22"/><path d="M0 16.5H32M0 32H32M1 0V16M17 16V32" stroke="#b4583c" stroke-width="2" fill="none"/></pattern>
+      </defs>
+      <path class="hatch" d="M40 496l16-16M72 496l16-16M104 496l16-16M136 496l16-16M168 496l16-16M200 496l16-16M232 496l16-16M264 496l16-16M296 496l16-16M328 496l16-16M360 496l16-16M392 496l16-16M424 496l16-16M456 496l16-16M488 496l16-16M520 496l16-16M552 496l16-16M584 496l16-16M616 496l16-16M648 496l16-16M680 496l16-16M712 496l16-16M744 496l16-16"/>
+      <rect class="wall kf" x="104" y="254" width="432" height="226"/>
+      <rect class="wall kf" x="536" y="342" width="176" height="138"/>
+      <rect class="lead kf" x="528" y="328" width="192" height="14"/>
+      <rect class="gl kf" x="560" y="368" width="128" height="104"/><path class="bars" d="M592 368V472M624 368V472M656 368V472"/>
+      <rect class="gl kf" x="148" y="280" width="84" height="62"/><path class="bars" d="M190 280V342M148 300H232"/>
+      <rect class="gl kf" x="408" y="280" width="84" height="62"/><path class="bars" d="M450 280V342M408 300H492"/>
+      <rect class="gl kf" x="372" y="392" width="120" height="62"/><path class="bars" d="M412 392V454M452 392V454M372 412H492"/>
+      <rect class="gl kf" x="240" y="398" width="50" height="82"/><path class="bars" d="M248 410H282V440H248Z"/>
+      <rect class="pale kf" x="226" y="352" width="78" height="10"/>
+      <path class="roof kf" d="M214 390 230 362H300L316 390Z"/>
+      <rect class="deep kf" x="262" y="52" width="40" height="98"/>
+      <path class="mort" d="M262 64H302M262 76H302M262 88H302M262 100H302M262 112H302M262 124H302M262 136H302"/>
+      <rect class="pale kf" x="256" y="44" width="52" height="10"/>
+      <rect class="clay kf" x="268" y="26" width="12" height="18"/><rect class="clay kf" x="284" y="26" width="12" height="18"/>
+      <path class="roof kf" d="M92 232 232 96H408L548 232Z"/>
+      <rect class="felt kf" x="161" y="177" width="32" height="16"/><path class="bars" d="M161 182H193M161 189H193"/>
+      <rect class="deep kf" x="168" y="193" width="32" height="16" transform="rotate(16 184 201)"/>
+      <rect class="deep kf" x="226" y="88" width="188" height="12"/>
+      <path class="mort" d="M248 88V100M270 88V100M292 88V100M314 88V100M336 88V100M358 88V100M380 88V100M402 88V100"/>
+      <rect class="pale kf" x="258" y="140" width="48" height="12"/>
+      <rect class="gl kf" x="86" y="232" width="468" height="12"/>
+      <rect class="lead kf" x="82" y="244" width="476" height="10"/>
+      <rect class="lead kf" x="538" y="254" width="10" height="226"/>
+      <path class="k" d="M40 480H760"/>
+    </svg>
+    <button type="button" class="hs lft" style="left:35.25%;top:7.7%" data-spot="chimney" aria-pressed="false" aria-label="Chimney"><i></i><span aria-hidden="true">Chimney</span></button>
+    <button type="button" class="hs" style="left:47.5%;top:17.7%" data-spot="ridge" aria-pressed="false" aria-label="Ridge"><i></i><span aria-hidden="true">Ridge</span></button>
+    <button type="button" class="hs" style="left:58.75%;top:33.7%" data-spot="reroof" aria-pressed="false" aria-label="Whole roof"><i></i><span aria-hidden="true">Whole roof</span></button>
+    <button type="button" class="hs lft" style="left:22%;top:36.9%" data-spot="slipped" aria-pressed="true" aria-label="Slipped tile"><i></i><span aria-hidden="true">Slipped tile</span></button>
+    <button type="button" class="hs" style="left:68.5%;top:47.9%" data-spot="gutters" aria-pressed="false" aria-label="Gutters"><i></i><span aria-hidden="true">Gutters</span></button>
+    <button type="button" class="hs lft" style="left:33.1%;top:68.7%" data-spot="lead" aria-pressed="false" aria-label="Porch lead"><i></i><span aria-hidden="true">Porch lead</span></button>
+    <button type="button" class="hs" style="left:78%;top:64.2%" data-spot="flat" aria-pressed="false" aria-label="Flat roof"><i></i><span aria-hidden="true">Flat roof</span></button>
+    </div>
+    <div class="spots" role="group" aria-label="Parts of the roof">
+      <button type="button" data-spot="slipped" aria-pressed="true">Slipped tile</button>
+      <button type="button" data-spot="ridge" aria-pressed="false">Ridge</button>
+      <button type="button" data-spot="chimney" aria-pressed="false">Chimney</button>
+      <button type="button" data-spot="gutters" aria-pressed="false">Gutters</button>
+      <button type="button" data-spot="flat" aria-pressed="false">Flat roof</button>
+      <button type="button" data-spot="lead" aria-pressed="false">Porch lead</button>
+      <button type="button" data-spot="reroof" aria-pressed="false">Whole roof</button>
+    </div>
+  </div>
+  <div class="fix" aria-live="polite">
+    <h3 id="fx-t">Slipped or missing tile</h3>
+    <p class="prob" id="fx-p">One loose tile lets rain straight onto the felt, and the next storm takes its neighbours.</p>
+    <p id="fx-d">We slot a matching tile back in, fix it with a tile clip, and check the courses round it while we're up there.</p>
+    <p class="price"><span id="fx-l">Roof repairs from</span><b id="fx-b">£120</b></p>
+    <a href="#quote" id="fx-a" data-job="Roof repair">Ask about this repair</a>
+    <small>Example prices for this demo site.</small>
+  </div>
+</section>
+
+<section class="prices" id="prices" aria-labelledby="pr-h">
+  <figure>
+    <img src="assets/roof-detail.webp" width="1400" height="788" loading="lazy" alt="Close-up of new stepped lead flashing dressed around a red brick chimney on a slate roof.">
+    <figcaption class="cap">Illustrative photos</figcaption>
+    <div class="edge" aria-hidden="true"><i></i><svg viewBox="0 0 240 70" preserveAspectRatio="xMaxYMax meet"><path class="f" d="M0 3H60V20H120V37H180V54H240V70H0Z"/><path class="l" d="M0 3H60V20H120V37H180V54H240"/></svg></div>
+  </figure>
+  <div class="course wrap">
+    <div class="course-head">
+      <h2 id="pr-h">Rough prices, laid out like a roof</h2>
+      <p class="lede">Clear starting prices for every kind of job, so you know roughly where you stand. Every job then gets a fixed written quote.</p>
+    </div>
+    <ul>
+      <li><h3>Roof repairs and slipped tiles</h3><span class="fr">from<b>£120</b></span><p>Slipped, cracked or missing tiles put back and fixed, ridge tiles re-bedded.</p><span class="t">Usually <b>half a day</b></span></li>
+      <li><h3>Gutters, fascias and soffits</h3><span class="fr">from<b>£450</b></span><p>Rotten timber or sagging plastic replaced in one run, with new gutters and downpipes.</p><span class="t">Usually <b>1 to 2 days</b></span></li>
+      <li><h3>Chimney repairs and repointing</h3><span class="fr">from<b>£350</b></span><p>Stacks repointed, new flaunching round the pots, cowls fitted.</p><span class="t">Usually <b>1 day</b></span></li>
+      <li><h3>Leadwork and valleys</h3><span class="fr">from<b>£250</b></span><p>New lead flashings, aprons and valleys, dressed by hand to fit.</p><span class="t">Usually <b>1 day</b></span></li>
+      <li><h3>Flat roofs (EPDM or GRP)</h3><span class="fr">from<b>£1,800</b></span><p>Extensions, garages and dormers stripped and re-covered in a one-piece membrane.</p><span class="t">Usually <b>1 to 3 days</b></span></li>
+      <li><h3>Full re-roof</h3><span class="fr">from<b>£7,500</b></span><p>Old tiles off, new breathable membrane and battens, new tiles and a dry-fixed ridge.</p><span class="t">Usually <b>5 to 8 days</b></span></li>
+      <li><h3>Storm damage call-outs</h3><span class="fr"><em>Price on the phone</em></span><p>Made watertight first, then a written quote for the proper repair.</p><span class="t">Usually <b>same or next day</b></span></li>
+    </ul>
+    <p class="pnote">Prices and times are examples for this demo site.</p>
+  </div>
+</section>
+
+<section class="work" id="work" aria-labelledby="wk-h"><div class="wrap">
+  <div class="ba" id="ba" style="--pos:50%">
+    <img src="assets/roof-before.webp" width="1200" height="900" loading="lazy" alt="Before: a bungalow roof of old concrete tiles covered in moss, with several tiles slipped out of line and a sagging white gutter.">
+    <img class="after" src="assets/roof-after.webp" width="1200" height="900" loading="lazy" alt="After: the same bungalow with a new roof of neat dark grey tiles, a fresh ridge, lead round the chimney and new black gutters.">
+    <span class="lab lb">Before</span><span class="lab la">After</span><span class="cap">Illustrative photos</span>
+    <input type="range" min="0" max="100" value="50" id="ba-range" aria-label="Compare the roof. Move left to see more of the new roof, right to see more of the old one.">
+    <div class="bar" aria-hidden="true"><div class="grip"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square"><path d="M10 8 4 14l6 6M18 8l6 6-6 6"/></svg></div></div>
+  </div>
+  <div class="work-copy">
+    <h2 id="wk-h">Moss and slipped tiles off. New roof on.</h2>
+    <p class="lede">A tired bungalow roof in Colehill, stripped back to the rafters and re-roofed. Drag the slider to compare. Illustrative photos.</p>
+    <dl class="facts">
+      <div><dt>Six working days</dt><dd>Watertight every night</dd></div>
+      <div><dt>New membrane and battens</dt><dd>Under every tile</dd></div>
+      <div><dt>Dry-fixed ridge</dt><dd>No mortar to wash out</dd></div>
+      <div><dt>Tidy site</dt><dd>Skip, sweep and magnet for nails</dd></div>
+    </dl>
+  </div>
+</div></section>
+
+<section class="patch" id="patch" aria-labelledby="pt-h">
+  <div class="patch-head">
+    <h2 id="pt-h">Wimborne and the villages round it</h2>
+    <p class="lede">Based in Wimborne and usually within about eight miles: Colehill, Ferndown, Merley, Corfe Mullen and West Parley. Tap a place to see a review or a job from there.</p>
+  </div>
+  <div class="mapwrap"><div class="map" id="map">
+    <svg class="sheet" viewBox="40 350 620 545" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><defs><path id="pt" d="M0-9 3.4-2.4H1.7L4.6 3.2H.9V6H-.9V3.2H-4.6L-1.7-2.4H-3.4Z"/><path id="ph" d="M-3 2-1.4-2M0 2V-3M3 2 1.4-2"/></defs><g id="mapg"><rect class="m-land" width="1000" height="880"/><path class="m-wood" d="M589 -28C527 -9 635 44 643 85C651 126 630 178 636 216C642 254 657 294 679 312C701 330 738 338 768 324C798 309 827 257 857 227C887 197 920 185 946 142C973 99 1077 -0 1018 -28C958 -57 652 -47 589 -28Z"/><path class="m-heath" d="M411 159C437 149 485 161 507 182C529 202 547 253 543 284C539 315 507 360 482 369C457 378 415 361 393 341C371 320 347 274 350 244C353 214 385 169 411 159Z"/><path class="m-cont" d="M517 744C513 745 498 745 494 750C491 756 493 771 494 778C496 785 501 788 506 794C511 800 518 807 525 812C531 817 535 821 543 824C551 826 564 828 573 827C582 826 589 822 596 818C602 814 610 808 611 801C612 794 606 784 602 778C597 773 589 771 583 767C576 763 570 760 561 756C552 752 535 747 528 746C521 744 519 744 517 744M472 721C468 723 453 729 450 733C446 738 448 742 449 749C451 755 457 765 461 772C465 778 468 783 473 790C478 797 485 806 490 812C496 819 499 823 506 829C512 834 521 841 528 845C536 850 541 854 551 854C560 855 575 851 584 849C594 846 599 843 607 839C614 835 623 830 629 826C635 821 640 820 642 812C644 805 643 790 640 782C638 775 631 772 625 767C620 763 614 760 606 756C599 752 587 748 579 745C570 741 564 737 555 733C547 730 536 727 528 725C520 723 515 721 506 721C496 720 478 721 472 721C466 722 472 721 472 721M941 880C938 878 929 869 921 865C913 862 902 860 893 857C884 855 875 853 865 853C855 853 840 854 835 857C829 860 832 867 831 870C831 874 833 878 833 880M719 517C718 521 713 534 714 542C716 549 728 564 730 562C733 560 733 538 731 530C729 523 721 519 719 517C717 514 719 517 719 517M34 626C36 628 39 635 45 639C51 642 62 648 67 648C73 648 81 642 79 639C77 636 64 631 56 629C49 627 37 627 34 626M572 880C576 878 588 873 596 869C603 865 610 861 617 857C624 854 630 850 636 846C642 842 646 841 652 835C659 829 670 820 674 812C678 805 677 796 675 790C673 783 668 779 663 773C657 767 649 761 642 756C636 751 631 748 623 745C615 741 604 737 596 733C588 730 581 726 573 723C565 720 558 717 551 714C543 712 537 710 528 708C519 706 506 703 494 702C483 700 472 700 461 700C449 701 436 700 427 703C418 707 407 715 406 722C404 729 412 738 416 746C420 753 425 760 430 767C436 775 442 783 447 790C452 797 457 803 461 809C465 815 468 821 472 827C476 833 480 839 485 846C490 853 498 863 503 869C509 874 515 878 517 880C520 882 517 880 517 880M988 880C984 878 973 872 965 869C957 865 951 861 942 857C933 854 919 851 910 849C901 846 897 846 888 844C878 841 864 837 855 835C845 833 839 829 831 829C824 829 812 828 808 835C804 841 807 861 808 869C809 876 813 878 814 880M820 369C818 372 811 377 806 384C801 390 796 399 791 406C787 414 785 423 779 429C773 434 763 437 753 438C743 438 729 431 719 432C710 432 702 435 696 440C691 445 688 454 685 463C683 473 682 485 681 496C680 508 681 520 682 530C683 540 683 547 685 556C687 566 691 578 694 587C697 595 699 602 703 609C708 617 713 626 719 631C725 636 735 642 742 640C748 638 754 628 758 621C761 613 762 604 764 595C766 585 767 575 768 564C769 553 770 542 771 530C772 519 774 506 775 496C776 487 774 481 778 474C781 467 791 458 798 454C805 449 813 450 820 446C828 442 836 435 842 429C848 422 851 416 854 408C857 401 860 391 858 384C856 376 849 364 843 362C836 360 824 368 820 369M0 662C4 664 15 669 22 672C30 676 37 678 45 681C52 684 58 687 68 688C77 690 92 692 101 691C110 689 116 684 124 680C131 677 139 673 146 670C154 667 159 664 169 662C178 659 191 656 202 656C213 656 227 661 236 663C245 665 249 666 258 668C268 670 283 674 292 676C301 679 307 680 315 683C322 687 331 692 337 696C344 701 348 706 354 711C359 716 365 722 371 728C376 733 380 738 386 745C391 751 399 761 404 767C410 773 412 776 416 781C420 787 425 794 429 801C433 808 438 816 441 824C445 831 447 838 449 847C452 857 455 875 456 880C457 885 456 880 456 880M1000 808C998 811 994 819 988 824C983 829 976 835 966 838C957 841 943 839 933 839C922 838 912 837 903 835C893 833 885 831 876 828C868 825 861 822 854 819C846 816 841 812 831 809C822 807 807 803 798 804C788 806 779 811 775 818C771 825 773 838 775 846C777 854 783 861 787 867C790 873 794 878 796 880M624 880C627 878 634 872 640 867C647 863 655 856 663 851C670 847 678 844 685 839C693 834 703 830 708 824C712 817 714 809 712 801C710 793 702 785 697 778C693 772 691 769 685 764C680 759 670 752 663 747C655 742 648 738 640 733C633 729 625 725 618 722C610 719 603 717 596 714C588 711 581 707 573 704C566 701 560 699 551 696C541 694 526 690 517 688C508 686 504 686 494 685C485 684 472 683 461 682C449 681 436 680 427 679C418 678 414 678 404 677C395 676 380 673 371 671C361 669 356 667 348 664C341 660 333 656 326 652C318 647 310 640 303 635C297 630 291 625 285 621C280 616 276 613 270 609C263 605 255 599 247 595C240 591 234 587 225 585C215 583 200 582 191 583C182 585 176 590 169 593C161 597 155 599 146 602C138 604 126 608 118 609C109 610 104 611 96 609C87 608 76 602 67 599C59 596 52 594 45 592C37 589 30 587 22 584C15 581 4 577 0 576M507 0C507 6 507 23 508 34C509 45 511 58 513 68C514 77 514 82 517 91C519 101 523 115 527 124C530 133 535 141 538 147C542 152 544 157 551 159C557 161 571 164 576 158C581 152 579 135 581 124C582 113 584 99 584 90C585 82 585 81 584 73C584 66 584 55 582 45C581 35 577 19 575 11C573 4 571 2 571 0M865 305C861 305 850 306 843 308C835 310 828 313 820 317C813 321 805 326 798 332C791 337 783 345 777 350C772 355 770 358 764 363C758 367 751 374 742 378C732 381 717 381 708 383C699 385 691 386 685 390C680 393 677 398 674 406C671 415 668 429 667 440C665 451 664 464 664 474C663 483 663 489 663 496C663 504 663 510 663 519C664 528 665 542 666 553C668 564 670 577 672 587C673 596 675 602 677 609C679 617 682 624 685 632C689 639 693 647 699 654C705 661 712 668 719 673C726 679 733 685 742 685C750 686 763 682 770 677C776 672 776 664 778 654C780 645 781 631 783 621C784 610 785 600 787 590C788 581 790 572 792 564C794 556 796 549 799 542C803 534 807 526 812 519C818 512 826 505 831 499C837 494 841 491 847 485C852 479 860 471 865 464C870 458 873 454 876 447C880 441 884 434 888 425C891 416 896 404 898 395C901 386 902 382 903 372C905 363 906 348 905 338C904 329 903 322 896 316C890 310 871 307 866 305C861 303 865 305 865 305M292 403C290 406 282 411 277 417C272 424 268 431 265 440C262 449 259 463 259 474C259 485 261 499 265 508C269 517 274 525 281 527C288 529 299 523 307 519C314 515 321 510 326 504C331 499 335 494 338 485C342 476 346 463 346 451C346 440 343 426 339 417C336 409 334 404 326 402C318 400 298 403 292 403C287 403 292 403 292 403M0 704C4 706 13 710 22 712C32 715 45 718 56 719C67 720 80 721 90 719C99 718 105 714 113 711C120 707 127 703 135 699C142 695 150 692 158 688C167 685 181 679 188 677C195 675 194 676 202 678C210 679 227 683 236 686C245 688 251 689 258 692C266 694 274 696 282 699C291 703 301 707 309 711C316 715 322 718 328 722C335 726 342 731 348 737C355 742 363 750 368 756C374 762 377 766 382 771C387 777 392 783 396 790C400 797 404 803 407 812C411 822 414 835 415 846C415 857 412 874 412 880C412 886 412 880 412 880M1000 767C998 770 993 777 989 783C985 788 980 795 975 801C969 807 963 813 955 817C947 821 933 823 926 824C918 825 918 825 910 823C902 822 886 818 876 815C867 811 861 807 854 803C846 799 839 794 831 790C824 786 817 781 810 778C802 776 794 775 787 775C779 775 772 778 764 779C757 779 749 780 742 778C734 775 726 770 719 765C712 759 704 750 698 745C692 739 688 737 682 733C677 729 670 725 663 721C656 717 648 712 640 708C633 704 626 701 618 697C610 694 602 691 593 688C584 685 571 681 562 678C553 676 549 675 539 673C530 672 516 669 506 668C496 667 489 667 480 666C470 665 460 663 449 662C439 660 425 658 416 656C406 654 401 652 393 649C386 646 378 643 371 639C363 635 356 631 348 626C341 621 333 614 327 609C322 605 320 603 315 598C309 592 300 582 294 575C289 569 287 563 281 558C275 553 268 546 258 544C249 542 234 545 225 546C215 548 208 550 200 553C192 556 185 560 177 564C169 568 163 572 154 575C145 579 132 584 124 587C115 589 109 591 101 590C94 590 87 586 79 584C71 581 62 578 53 575C43 572 31 568 22 565C14 562 4 558 0 557C-4 556 0 557 0 557M661 880C664 878 672 872 679 869C687 865 699 860 708 858C716 855 723 854 730 854C738 855 745 857 753 862C760 866 771 877 775 880C778 883 775 880 775 880M26 0C25 4 21 15 21 23C22 30 24 39 28 45C32 51 38 57 45 58C52 59 61 56 67 52C73 48 78 42 81 34C83 25 83 6 84 0C84 -6 84 0 84 0M491 0C491 6 492 24 493 34C494 43 494 47 496 56C497 66 499 81 501 90C503 100 503 104 506 113C508 123 511 137 515 147C519 156 524 163 528 169C532 175 534 177 539 183C545 189 554 198 560 203C567 208 572 212 578 214C585 216 595 219 599 214C604 210 606 196 607 189C608 181 607 178 607 169C606 160 605 147 604 135C604 124 604 113 604 102C604 90 605 79 605 68C604 56 604 45 603 34C601 23 597 6 596 0C595 -6 596 0 596 0M1000 133C999 138 996 150 994 158C992 166 990 171 989 181C987 190 983 206 985 214C987 223 998 229 1000 232C1002 235 1000 232 1000 232M1000 732C998 735 993 740 989 746C984 752 979 760 973 767C967 774 961 784 955 790C950 795 947 798 940 801C932 804 920 808 910 808C900 808 890 804 882 801C874 798 868 794 861 790C855 786 849 782 843 776C836 770 827 762 821 756C816 750 813 747 809 740C805 732 801 721 800 711C798 700 799 688 799 677C799 666 800 654 801 643C801 632 802 619 804 609C805 600 806 593 809 585C812 577 816 567 820 560C824 552 828 548 833 542C839 535 849 526 854 520C859 514 861 514 865 508C870 502 877 493 883 485C888 478 892 470 896 463C900 455 904 448 907 440C910 432 913 425 916 417C919 410 921 403 924 395C927 386 930 376 933 367C935 358 938 347 940 338C942 330 944 325 945 316C947 306 951 291 949 282C947 273 941 265 933 262C924 259 910 262 899 263C888 264 875 267 865 269C856 271 850 273 843 276C835 278 828 281 820 284C813 288 805 291 798 296C790 301 782 307 775 312C768 317 762 323 755 327C749 332 744 336 737 338C729 341 718 343 708 344C697 345 683 340 674 342C666 345 661 352 657 361C654 370 653 385 652 395C651 404 651 408 650 417C650 427 650 440 649 451C649 463 649 474 648 485C648 496 648 508 648 519C648 530 649 542 649 553C649 564 650 575 650 587C650 598 652 610 650 621C649 632 646 647 640 653C635 659 626 657 618 657C610 657 599 655 590 654C580 653 572 652 562 651C552 650 539 649 528 648C517 647 504 646 494 645C485 645 481 644 472 643C463 641 448 639 438 636C429 634 423 632 416 629C408 626 400 622 393 617C386 612 378 605 373 598C368 591 365 584 364 575C364 567 368 554 371 545C373 535 377 527 379 519C382 511 383 506 385 496C386 487 388 474 388 463C389 451 388 439 387 429C386 418 385 409 382 400C379 391 375 381 371 374C367 367 365 364 360 360C354 355 346 349 337 346C328 344 313 343 303 345C294 346 288 349 281 353C273 357 264 365 258 370C253 375 251 378 247 384C243 390 237 399 233 406C229 414 227 420 223 429C220 438 216 451 213 460C211 470 209 477 207 485C204 493 202 500 198 508C193 515 185 524 180 530C175 536 172 537 167 542C161 546 153 551 146 555C139 559 133 563 124 565C114 567 99 568 90 567C81 567 76 564 67 562C58 559 45 556 36 553C27 550 17 547 11 544C5 542 2 541 0 540M135 880C131 876 119 864 113 857C108 851 105 846 101 839C97 831 93 820 91 812C89 804 88 797 89 790C90 782 91 774 95 767C99 760 107 753 112 747C118 742 122 738 127 733C133 729 139 724 146 720C153 716 161 711 169 707C176 703 184 698 191 697C199 696 204 699 213 701C223 703 238 706 247 709C257 711 262 713 270 716C277 718 285 721 292 725C300 728 307 732 315 737C322 742 331 749 337 754C343 759 346 761 351 767C356 773 363 782 367 790C372 797 375 803 377 812C379 822 379 836 378 846C377 856 373 866 371 872C369 877 368 879 367 880M478 0C478 6 480 24 481 34C482 43 482 48 483 57C484 66 486 79 488 90C489 101 491 115 493 124C495 134 496 139 498 147C501 154 504 162 508 169C512 177 517 185 522 192C528 199 534 207 539 212C544 218 547 220 553 226C558 231 567 239 573 245C579 250 584 254 589 259C595 265 602 272 607 278C612 285 615 290 618 298C621 307 625 319 627 327C629 336 629 340 630 350C632 359 633 372 634 384C634 395 635 406 635 417C635 429 635 440 635 451C635 463 634 474 634 485C633 496 633 508 632 519C631 530 631 543 629 553C628 562 628 568 625 575C622 583 619 592 614 598C609 604 604 608 596 611C587 615 573 616 562 618C551 619 539 618 528 618C517 618 505 617 494 615C484 614 476 612 467 609C459 606 450 603 443 598C437 593 431 586 427 579C423 571 422 563 421 553C419 543 420 530 420 519C420 508 420 496 420 485C420 474 420 463 419 451C419 440 418 427 417 417C415 408 415 404 413 395C411 386 408 372 404 363C401 355 397 347 393 341C389 335 387 332 382 327C376 323 369 317 360 313C350 310 337 307 326 306C315 306 301 308 292 310C283 313 277 315 270 319C262 323 253 330 247 335C241 340 238 343 233 350C227 356 221 365 217 372C212 380 208 387 205 395C201 402 198 410 195 417C192 425 189 432 186 440C183 448 180 455 178 463C175 470 172 478 168 485C165 493 161 500 156 508C150 515 141 524 135 530C128 536 124 539 117 542C109 544 99 545 90 545C81 545 74 543 65 542C55 540 43 537 34 534C25 532 17 529 11 527C6 525 2 523 0 523M1000 77C998 81 993 94 990 102C987 109 984 117 981 124C978 132 975 139 972 147C968 154 965 162 961 169C957 177 951 185 947 192C942 198 939 202 933 207C926 212 918 218 910 223C903 227 895 230 888 233C880 236 873 238 865 241C858 244 851 246 843 249C834 252 823 256 815 259C806 263 798 267 791 271C783 275 777 278 771 282C765 286 760 290 753 294C746 297 740 303 730 305C721 307 706 307 697 305C688 303 682 298 676 293C671 289 667 285 663 279C659 274 655 267 652 259C648 252 644 243 640 234C637 225 635 212 633 203C631 194 631 190 629 180C628 171 626 158 625 147C624 135 622 124 622 113C622 102 624 90 624 79C625 68 625 56 625 45C625 34 624 19 623 11C622 4 622 2 621 0M0 101C3 103 11 110 19 113C26 115 37 117 45 117C53 117 60 116 67 112C75 109 83 104 90 98C96 93 101 86 106 79C110 72 114 65 117 56C120 48 122 40 124 30C125 21 126 5 126 0C126 -5 126 0 126 0M1000 701C997 704 985 716 980 722C974 728 971 733 966 739C962 745 959 749 954 756C948 762 940 773 933 778C926 784 920 787 910 788C901 788 885 782 876 779C868 775 866 772 860 767C855 762 847 754 843 748C838 741 835 734 831 726C828 718 825 708 823 699C821 691 820 686 820 677C819 668 819 652 820 643C820 634 820 629 822 621C824 612 828 599 831 591C835 584 838 580 843 573C847 567 854 559 860 553C866 546 872 540 876 534C881 529 884 525 888 519C893 513 898 504 903 496C907 489 911 481 914 474C918 466 921 459 924 451C928 444 930 437 933 429C937 420 940 410 944 401C947 391 951 381 954 372C958 364 960 357 963 350C966 342 969 335 973 327C977 320 982 311 987 305C991 298 998 292 1000 289C1002 286 1000 289 1000 289M233 880C229 878 217 873 210 869C203 864 197 859 191 854C185 848 179 842 175 835C170 828 165 820 162 812C159 805 157 797 157 790C156 782 156 775 158 767C160 760 165 751 170 745C176 738 182 731 191 729C200 726 215 728 225 729C235 730 240 731 250 733C259 736 272 741 281 744C289 748 295 752 301 756C306 760 310 762 315 767C320 773 329 782 333 790C337 797 339 805 339 812C340 820 339 827 336 835C334 842 330 850 324 857C319 864 308 873 303 877C299 880 298 879 297 880M466 0C466 6 468 23 469 34C470 45 471 56 472 65C473 74 473 80 475 90C476 100 477 114 479 124C480 134 481 143 483 153C486 162 489 172 493 181C497 189 502 196 506 202C510 208 512 211 517 217C522 223 529 231 535 237C541 243 545 246 551 252C556 258 564 265 569 271C575 277 580 282 584 288C589 294 592 300 596 308C599 316 604 327 607 336C610 345 611 352 613 361C615 370 617 381 618 390C619 399 620 407 620 417C620 428 621 440 620 451C620 463 619 476 618 485C618 495 617 498 615 508C613 517 610 533 607 542C604 550 601 556 596 561C590 567 581 572 574 575C566 579 560 580 551 580C541 580 526 579 517 578C507 576 502 574 494 570C487 566 480 559 474 553C469 546 465 538 462 530C459 523 457 517 455 508C453 498 451 483 450 474C448 464 448 461 447 451C446 442 445 429 444 417C443 406 441 393 440 384C438 374 438 370 435 361C433 352 430 340 427 332C424 323 420 317 416 310C411 304 406 298 400 293C393 289 387 285 378 282C370 279 359 277 348 276C338 275 326 275 315 275C303 276 290 279 281 281C272 283 266 286 258 289C251 293 242 298 236 303C230 307 226 310 221 316C215 322 208 331 203 338C198 346 195 351 191 359C187 366 184 373 180 381C176 389 172 398 169 406C165 414 162 421 159 429C155 436 152 444 148 451C144 459 140 467 136 474C132 481 129 486 124 492C119 498 114 504 106 508C99 512 89 515 79 517C68 518 56 517 45 515C34 514 22 510 15 508C7 506 2 503 0 502M1000 37C998 41 993 53 989 61C985 69 981 78 978 87C974 95 970 104 966 112C963 120 959 128 955 135C951 142 948 148 944 154C940 160 938 163 932 169C927 175 917 185 910 191C903 197 899 199 892 203C885 207 877 211 869 214C861 218 851 222 843 225C835 228 828 230 820 233C813 236 805 238 798 241C790 244 783 247 775 250C768 254 762 257 753 261C743 264 729 270 719 270C709 270 699 265 692 259C684 254 679 246 674 240C669 233 666 228 663 221C659 213 655 200 653 192C650 183 650 179 648 169C647 160 645 147 644 135C643 124 643 113 643 102C643 90 645 79 646 68C647 56 647 45 647 34C648 23 647 6 647 0C647 -6 647 0 647 0M0 156C4 156 13 159 22 159C32 160 45 159 54 158C64 157 71 154 79 151C86 148 95 142 101 138C107 133 110 130 115 124C120 118 126 109 130 102C134 94 136 87 139 79C142 71 144 63 146 54C148 44 150 31 151 23C152 14 152 4 153 0M1000 670C996 673 983 683 978 688C972 693 971 694 966 700C961 705 953 715 948 722C942 729 938 735 933 741C927 747 921 753 914 756C907 759 895 759 888 757C880 755 875 750 869 745C864 739 858 730 854 722C850 715 848 707 846 699C843 692 842 686 841 677C840 668 841 652 842 643C843 634 845 628 848 621C851 613 855 605 860 598C864 591 872 582 876 577C881 571 883 569 888 563C892 557 898 549 903 542C908 534 912 526 916 519C920 511 923 504 927 496C930 489 933 481 936 474C939 466 942 460 945 451C948 443 951 433 955 424C959 415 963 404 966 395C970 386 973 380 976 372C980 365 983 357 987 350C991 343 998 333 1000 330C1002 327 1000 330 1000 330M454 0C454 6 456 23 457 34C458 45 459 58 460 68C460 77 461 81 461 90C462 100 462 113 463 124C464 135 463 147 465 158C466 169 468 182 471 192C473 201 474 207 478 214C482 222 490 231 494 237C499 242 502 244 507 248C513 253 521 258 528 264C535 270 544 277 550 282C556 287 557 288 562 293C566 299 572 308 577 316C581 323 584 331 587 338C590 346 593 354 596 363C598 373 600 384 602 395C603 406 604 417 604 429C604 440 604 451 602 463C601 474 599 487 596 496C593 506 588 513 584 519C580 524 579 527 571 530C564 533 548 537 539 536C530 536 524 533 517 528C510 523 502 515 497 508C491 501 488 493 486 485C483 478 481 472 479 463C477 453 474 438 473 429C471 419 471 416 470 406C469 397 468 384 467 372C466 361 464 348 463 338C462 329 462 325 460 316C458 306 455 291 451 282C448 273 444 268 438 263C432 258 423 254 416 252C408 249 403 248 393 247C384 246 371 245 360 245C348 245 336 245 326 246C316 246 308 247 298 248C289 249 279 251 270 252C260 254 252 256 243 259C235 263 226 267 219 271C212 275 208 278 202 284C197 289 190 297 185 305C180 312 176 320 172 327C168 335 165 342 161 350C158 357 155 365 151 372C148 380 145 387 141 395C138 402 134 410 130 417C126 425 122 433 117 440C112 447 106 455 101 460C96 466 92 470 85 474C77 478 67 483 56 484C46 486 32 484 22 482C13 481 4 477 0 476M1000 1C998 4 992 15 989 23C985 30 981 39 978 47C974 55 970 64 966 72C963 80 959 89 955 96C951 104 948 111 944 118C940 124 938 129 933 135C928 142 920 152 914 158C909 164 905 167 899 172C893 177 884 183 876 187C869 191 861 194 854 198C846 201 840 203 831 206C823 209 814 212 804 214C795 217 784 220 775 223C767 225 762 227 753 228C743 230 728 232 719 230C710 229 702 223 697 218C691 214 688 210 685 203C681 196 677 188 674 178C671 169 669 158 668 147C667 136 666 124 666 113C666 102 667 90 667 79C668 68 669 56 669 45C670 34 671 19 671 11C671 4 671 2 671 0M0 203C6 203 22 202 34 201C45 200 58 198 67 196C77 194 82 193 90 190C97 187 105 184 112 179C120 174 129 165 135 158C140 151 142 147 146 139C150 132 154 121 156 113C159 105 161 99 163 90C165 82 167 70 169 61C170 51 171 44 172 34C173 24 175 6 175 0C176 -6 175 0 175 0M1000 637C996 639 985 644 978 648C970 653 961 659 955 663C949 668 946 671 940 677C935 683 928 692 921 697C914 703 906 711 899 710C891 709 881 698 876 691C872 683 872 674 872 666C872 657 874 649 876 642C879 634 884 628 889 621C893 613 900 605 905 598C910 590 914 583 918 575C922 568 925 560 929 553C932 545 935 538 937 530C940 523 942 516 945 508C948 499 952 488 955 479C958 470 962 460 964 451C967 443 970 436 973 429C976 421 978 414 982 406C985 399 989 390 992 384C995 377 999 371 1000 369M441 0C442 6 444 23 444 34C445 45 446 56 446 68C446 79 446 90 446 102C446 113 445 125 444 135C442 146 441 157 438 166C435 175 432 183 427 189C422 195 415 199 408 203C400 207 390 209 382 211C374 213 369 213 360 214C350 216 337 217 326 218C315 219 303 219 292 220C281 220 270 220 258 220C247 220 235 220 225 219C215 218 206 219 199 214C192 210 184 201 181 192C178 182 181 169 181 158C181 147 183 135 184 124C185 113 186 101 188 90C189 79 190 68 191 59C192 50 193 44 194 34C195 24 196 6 197 0C197 -6 197 0 197 0M980 0C979 4 974 15 970 23C967 30 964 38 961 45C957 53 954 60 951 68C947 75 944 83 939 90C935 98 931 106 926 113C921 120 915 128 910 134C905 140 903 142 898 147C892 151 884 158 876 163C869 168 861 171 854 175C846 178 841 181 831 183C822 186 807 190 798 192C789 194 785 195 775 195C766 195 751 196 742 194C732 193 725 189 719 185C713 181 709 176 706 169C702 163 699 156 697 147C694 137 692 124 691 113C690 102 690 90 690 79C690 68 691 56 691 45C692 34 693 19 693 11C693 4 694 2 694 0M0 257C5 255 18 250 28 248C37 246 46 245 56 244C67 243 79 242 90 243C101 244 116 245 124 248C131 251 133 252 135 259C137 267 137 284 137 293C136 303 135 307 132 316C130 325 127 336 124 346C120 355 117 364 113 372C109 380 105 388 101 395C97 401 95 405 90 411C85 417 79 424 71 429C64 434 53 438 46 440C38 442 32 441 25 440C17 439 4 433 0 431C-4 430 0 431 0 431M514 316C518 316 533 314 539 316C545 318 547 322 551 327C556 333 562 342 566 350C570 357 572 363 575 372C578 382 581 395 582 406C583 417 582 430 580 440C579 450 578 458 573 465C568 472 558 481 551 482C543 483 534 477 528 472C522 467 518 459 514 451C511 443 508 434 506 425C503 415 502 405 501 395C501 384 500 372 501 361C501 350 503 336 506 328C508 321 512 318 514 316M1000 599C996 598 983 598 978 594C972 590 967 584 965 575C963 567 964 551 964 542C965 532 966 528 967 519C969 510 973 495 975 485C977 476 979 470 981 463C983 455 986 448 989 439C992 430 998 415 1000 411C1002 406 1000 411 1000 411M428 0C428 6 430 23 430 34C430 45 431 56 430 68C430 79 429 92 427 102C426 111 425 117 422 124C420 132 417 139 413 147C408 154 400 162 393 168C386 173 378 177 371 180C363 183 358 184 348 186C339 188 326 189 315 190C303 190 291 190 281 188C271 186 261 184 253 181C246 177 241 175 236 169C230 164 224 156 221 147C217 137 215 122 214 113C212 103 212 100 212 90C212 81 213 66 213 56C214 47 214 43 215 34C216 24 218 6 218 0C219 -6 218 0 218 0M960 0C959 4 955 15 952 23C949 30 946 38 943 45C939 53 936 60 932 68C928 75 924 83 920 90C915 98 909 106 903 113C898 119 894 124 888 129C881 135 873 141 865 146C858 150 850 154 843 157C835 159 830 162 820 163C811 165 798 167 787 167C775 166 761 163 753 160C744 156 741 153 736 147C731 141 726 132 723 124C719 117 718 111 717 102C715 92 714 79 713 68C712 56 713 45 713 34C713 23 715 6 715 0C716 -6 715 0 715 0M411 0C411 6 413 23 413 34C413 45 412 57 411 68C409 78 407 88 404 97C402 106 397 114 393 121C389 127 386 131 381 135C375 140 369 145 360 149C350 153 334 156 326 158C318 159 317 159 310 158C302 157 289 155 281 151C272 148 264 141 258 136C253 130 250 125 247 118C244 110 241 100 239 90C238 80 237 68 237 56C236 45 237 32 238 23C239 13 241 4 241 0M940 0C938 4 935 14 932 23C929 31 925 41 921 49C918 57 914 64 910 70C906 77 902 83 897 90C891 97 883 106 876 112C870 117 866 120 859 124C851 128 841 133 832 135C824 138 817 139 809 139C800 139 789 138 781 135C774 133 768 130 762 124C756 118 750 109 746 102C742 94 741 88 739 79C737 70 735 56 735 45C735 34 736 19 736 11C736 4 737 2 737 0M388 0C389 6 391 23 390 34C390 45 387 58 385 68C382 77 378 84 374 90C370 97 366 102 360 107C353 112 346 117 337 119C328 120 313 120 303 118C294 115 287 108 281 102C275 95 272 88 270 81C267 73 266 66 265 56C264 47 264 32 265 23C265 13 268 4 268 0M916 0C915 4 913 15 910 23C907 31 903 40 899 48C895 55 892 61 887 68C881 75 872 85 866 90C859 96 855 98 848 102C840 105 830 109 820 109C810 109 796 105 789 102C781 98 779 95 775 89C771 84 767 76 764 67C761 57 760 45 759 34C759 23 761 6 762 0C762 -6 762 0 762 0M338 0C340 4 348 15 349 23C350 30 347 39 343 45C339 51 331 57 326 57C321 57 314 53 312 45C309 37 311 19 313 11C315 4 321 2 323 0M885 0C884 5 880 23 876 31C873 39 871 43 865 49C860 55 850 63 843 67C835 70 827 72 820 70C813 68 805 62 800 56C795 50 792 43 791 34C790 24 793 6 793 0C794 -6 793 0 793 0"/><g class="m-grid"><path d="M100 0V880"/><path d="M200 0V880"/><path d="M300 0V880"/><path d="M400 0V880"/><path d="M500 0V880"/><path d="M600 0V880"/><path d="M700 0V880"/><path d="M800 0V880"/><path d="M900 0V880"/><path d="M0 80H1000"/><path d="M0 180H1000"/><path d="M0 280H1000"/><path d="M0 380H1000"/><path d="M0 480H1000"/><path d="M0 580H1000"/><path d="M0 680H1000"/><path d="M0 780H1000"/></g><g class="m-tree"><use href="#pt" x="617" y="-3"/><use href="#pt" x="623" y="27"/><use href="#pt" x="654" y="-1"/><use href="#pt" x="656" y="30"/><use href="#pt" x="654" y="58"/><use href="#pt" x="647" y="72"/><use href="#pt" x="646" y="100"/><use href="#pt" x="644" y="124"/><use href="#pt" x="651" y="161"/><use href="#pt" x="649" y="188"/><use href="#pt" x="656" y="202"/><use href="#pt" x="651" y="233"/><use href="#pt" x="681" y="5"/><use href="#pt" x="671" y="25"/><use href="#pt" x="670" y="58"/><use href="#pt" x="681" y="80"/><use href="#pt" x="675" y="102"/><use href="#pt" x="681" y="130"/><use href="#pt" x="678" y="151"/><use href="#pt" x="672" y="176"/><use href="#pt" x="679" y="209"/><use href="#pt" x="671" y="239"/><use href="#pt" x="673" y="259"/><use href="#pt" x="671" y="283"/><use href="#pt" x="681" y="310"/><use href="#pt" x="696" y="-6"/><use href="#pt" x="704" y="26"/><use href="#pt" x="699" y="48"/><use href="#pt" x="704" y="81"/><use href="#pt" x="706" y="105"/><use href="#pt" x="698" y="124"/><use href="#pt" x="705" y="155"/><use href="#pt" x="705" y="176"/><use href="#pt" x="706" y="206"/><use href="#pt" x="707" y="239"/><use href="#pt" x="702" y="253"/><use href="#pt" x="708" y="286"/><use href="#pt" x="707" y="309"/><use href="#pt" x="733" y="3"/><use href="#pt" x="722" y="21"/><use href="#pt" x="728" y="52"/><use href="#pt" x="725" y="73"/><use href="#pt" x="727" y="99"/><use href="#pt" x="729" y="135"/><use href="#pt" x="723" y="157"/><use href="#pt" x="731" y="177"/><use href="#pt" x="733" y="214"/><use href="#pt" x="726" y="233"/><use href="#pt" x="733" y="260"/><use href="#pt" x="727" y="292"/><use href="#pt" x="732" y="310"/><use href="#pt" x="751" y="2"/><use href="#pt" x="749" y="27"/><use href="#pt" x="760" y="52"/><use href="#pt" x="751" y="78"/><use href="#pt" x="754" y="99"/><use href="#pt" x="749" y="125"/><use href="#pt" x="751" y="155"/><use href="#pt" x="751" y="178"/><use href="#pt" x="748" y="209"/><use href="#pt" x="759" y="236"/><use href="#pt" x="755" y="262"/><use href="#pt" x="750" y="289"/><use href="#pt" x="753" y="313"/><use href="#pt" x="784" y="3"/><use href="#pt" x="786" y="21"/><use href="#pt" x="785" y="45"/><use href="#pt" x="784" y="79"/><use href="#pt" x="780" y="110"/><use href="#pt" x="781" y="129"/><use href="#pt" x="784" y="161"/><use href="#pt" x="782" y="180"/><use href="#pt" x="779" y="207"/><use href="#pt" x="783" y="231"/><use href="#pt" x="778" y="261"/><use href="#pt" x="778" y="284"/><use href="#pt" x="805" y="2"/><use href="#pt" x="813" y="24"/><use href="#pt" x="806" y="56"/><use href="#pt" x="801" y="75"/><use href="#pt" x="813" y="109"/><use href="#pt" x="806" y="125"/><use href="#pt" x="812" y="159"/><use href="#pt" x="810" y="189"/><use href="#pt" x="811" y="207"/><use href="#pt" x="801" y="231"/><use href="#pt" x="806" y="260"/><use href="#pt" x="802" y="282"/><use href="#pt" x="833" y="-2"/><use href="#pt" x="831" y="24"/><use href="#pt" x="826" y="57"/><use href="#pt" x="833" y="84"/><use href="#pt" x="831" y="106"/><use href="#pt" x="828" y="124"/><use href="#pt" x="838" y="161"/><use href="#pt" x="829" y="188"/><use href="#pt" x="836" y="205"/><use href="#pt" x="833" y="240"/><use href="#pt" x="858" y="-4"/><use href="#pt" x="857" y="21"/><use href="#pt" x="861" y="49"/><use href="#pt" x="864" y="79"/><use href="#pt" x="856" y="100"/><use href="#pt" x="860" y="126"/><use href="#pt" x="863" y="151"/><use href="#pt" x="858" y="183"/><use href="#pt" x="855" y="212"/><use href="#pt" x="878" y="-3"/><use href="#pt" x="886" y="22"/><use href="#pt" x="889" y="53"/><use href="#pt" x="887" y="75"/><use href="#pt" x="883" y="107"/><use href="#pt" x="882" y="123"/><use href="#pt" x="889" y="160"/><use href="#pt" x="881" y="176"/><use href="#pt" x="916" y="-2"/><use href="#pt" x="907" y="31"/><use href="#pt" x="905" y="53"/><use href="#pt" x="908" y="82"/><use href="#pt" x="911" y="108"/><use href="#pt" x="905" y="132"/><use href="#pt" x="911" y="155"/><use href="#pt" x="934" y="1"/><use href="#pt" x="934" y="31"/><use href="#pt" x="932" y="46"/><use href="#pt" x="937" y="80"/><use href="#pt" x="940" y="107"/><use href="#pt" x="942" y="136"/><use href="#pt" x="955" y="-4"/><use href="#pt" x="965" y="25"/><use href="#pt" x="956" y="54"/><use href="#pt" x="960" y="79"/><use href="#pt" x="961" y="104"/><use href="#pt" x="991" y="5"/><use href="#pt" x="983" y="24"/></g><g class="m-tuft"><use href="#ph" x="363" y="235"/><use href="#ph" x="366" y="259"/><use href="#ph" x="384" y="267"/><use href="#ph" x="389" y="290"/><use href="#ph" x="397" y="313"/><use href="#ph" x="394" y="337"/><use href="#ph" x="410" y="186"/><use href="#ph" x="417" y="214"/><use href="#ph" x="412" y="236"/><use href="#ph" x="418" y="264"/><use href="#ph" x="413" y="283"/><use href="#ph" x="421" y="316"/><use href="#ph" x="409" y="343"/><use href="#ph" x="437" y="175"/><use href="#ph" x="445" y="210"/><use href="#ph" x="445" y="228"/><use href="#ph" x="448" y="318"/><use href="#ph" x="438" y="333"/><use href="#ph" x="462" y="186"/><use href="#ph" x="472" y="210"/><use href="#ph" x="462" y="265"/><use href="#ph" x="464" y="337"/><use href="#ph" x="497" y="188"/><use href="#ph" x="495" y="211"/><use href="#ph" x="497" y="288"/><use href="#ph" x="491" y="314"/><use href="#ph" x="493" y="342"/><use href="#ph" x="520" y="235"/><use href="#ph" x="526" y="258"/><use href="#ph" x="524" y="290"/><use href="#ph" x="517" y="313"/></g><path class="m-water m-stour" d="M-36 585C-13 595 61 641 100 647C139 654 162 621 196 625C230 628 271 656 304 670C336 684 363 697 393 710C423 722 452 730 482 744C512 757 539 780 571 789C604 799 643 792 679 801C714 809 750 824 786 840C821 856 875 888 893 897"/><path class="m-water" d="M511 -28C517 -1 532 86 550 136C568 186 603 231 621 273C640 314 649 348 661 386C673 424 679 460 693 500C707 539 725 585 743 625C761 664 785 702 800 738C815 774 824 816 836 840C847 865 863 878 868 886"/><path class="m-water m-thin" d="M161 -28C162 14 168 151 171 227C174 303 174 360 179 426C183 492 193 591 196 625"/><path class="m-road" d="M557 397C562 374 580 301 586 255C591 210 586 172 589 125C593 78 604 -3 607 -28"/><path class="m-road" d="M543 483C545 468 555 412 557 397"/><path class="m-road" d="M511 551C518 563 540 599 557 625C574 650 590 676 611 704C631 732 667 780 679 795"/><path class="m-road" d="M429 568C442 565 492 565 511 551C530 537 538 494 543 483"/><path class="m-road" d="M196 568C208 555 235 503 268 494C301 484 352 502 393 511C433 520 491 544 511 551"/><path class="m-road" d="M161 670C152 679 128 696 107 727C86 757 57 817 36 852C15 887 -9 923 -18 937"/><path class="m-road" d="M611 704C628 702 679 692 714 693C749 694 768 704 821 710C875 715 1000 724 1036 727"/><path class="m-a-case" d="M-36 613C-3 623 104 671 161 670C217 669 259 625 304 607C348 590 389 589 429 568C468 547 501 507 543 483C585 458 638 444 679 420C719 396 750 361 786 341C821 321 851 310 893 301C935 291 1012 287 1036 284"/><path class="m-a" d="M-36 613C-3 623 104 671 161 670C217 669 259 625 304 607C348 590 389 589 429 568C468 547 501 507 543 483C585 458 638 444 679 420C719 396 750 361 786 341C821 321 851 310 893 301C935 291 1012 287 1036 284"/>
+<path class="m-water m-stour" d="M1010 205C984 290 968 395 940 510C924 575 906 626 888 668"/>
+<path class="m-patch" pathLength="100" d="M84 470C124 424 204 412 282 430C360 448 440 468 520 478C584 486 642 522 652 600C662 680 642 742 582 762C502 788 402 762 322 772C242 782 142 802 92 762C52 728 58 520 84 470Z"/>
+<path id="lbl-stour" d="M312 676C352 690 392 706 432 722" fill="none"/>
+<path id="lbl-allen" d="M190 384C192 430 195 480 199 532" fill="none"/>
+<text class="m-wname"><textPath href="#lbl-stour">River Stour</textPath></text>
+<text class="m-wname"><textPath href="#lbl-allen">River Allen</textPath></text>
+<g transform="translate(446 468)"><rect class="m-shield" width="44" height="26"/><text class="m-shield-t" x="22" y="19">A31</text></g>
+<path class="m-tick" d="M100 350V366M100 895V879M200 350V366M200 895V879M300 350V366M300 895V879M400 350V366M400 895V879M500 350V366M500 895V879M600 350V366M600 895V879M40 480H56M660 480H644M40 580H56M660 580H644M40 680H56M660 680H644M40 780H56M660 780H644"/>
+<text class="m-mar" x="106" y="384">A</text><text class="m-mar" x="206" y="384">B</text><text class="m-mar" x="306" y="384">C</text><text class="m-mar" x="406" y="384">D</text><text class="m-mar" x="506" y="384">E</text>
+<text class="m-mar" x="46" y="474">1</text><text class="m-mar" x="46" y="574">2</text><text class="m-mar" x="46" y="674">3</text><text class="m-mar" x="46" y="774">4</text>
+<g transform="translate(630 412) scale(.75)"><path class="m-north" d="M0-30 11 12 0 5-11 12Z"/><text class="m-mar m-n" x="0" y="34">N</text></g></g></svg>
+    <button type="button" class="pin" style="left:24%;top:40%" data-place="p-wimborne" aria-pressed="false"><i></i><span>Wimborne</span></button>
+    <button type="button" class="pin" style="left:36.8%;top:26.4%" data-place="p-colehill" aria-pressed="false"><i></i><span>Colehill</span></button>
+    <button type="button" class="pin lft" style="left:76%;top:36.9%" data-place="p-ferndown" aria-pressed="false"><i></i><span>Ferndown</span></button>
+    <button type="button" class="pin job" style="left:24.2%;top:54.5%" data-place="p-merley" aria-pressed="false"><i></i><span>Merley</span></button>
+    <button type="button" class="pin job" style="left:10.8%;top:69.2%" data-place="p-corfe" aria-pressed="false"><i></i><span>Corfe Mullen</span></button>
+    <button type="button" class="pin job lft" style="left:92.1%;top:65%" data-place="p-parley" aria-pressed="false"><i></i><span>West Parley</span></button>
+    <button type="button" class="pin out" style="left:52%;top:95%" data-place="p-poole" aria-pressed="false"><i></i><span>Poole: ask us</span></button>
+    </div>
+    <p class="note"><span class="lg"><i class="r"></i>Review (sample)</span> <span class="lg"><i></i>Job (sample)</span> <span class="lg"><i class="z"></i>Where we usually work</span> <span class="sk">Rough sketch, not to scale</span></p></div>
+  <div class="places" aria-live="polite">
+    <article class="place" id="p-wimborne">
+      <h3>Wimborne</h3>
+      <svg class="stars" role="img" aria-label="5 out of 5 stars" viewBox="0 0 92 17"><use href="#st"/><use href="#st" x="19"/><use href="#st" x="38"/><use href="#st" x="57"/><use href="#st" x="76"/></svg>
+      <blockquote>Two slipped tiles over the back bedroom, sorted the next morning. They sent me photos from the roof so I could see the fix for myself.</blockquote>
+      <p class="who"><b>Margaret, Wimborne</b><span class="tag">Sample review</span></p>
+    </article>
+    <article class="place" id="p-colehill">
+      <h3>Colehill</h3>
+      <svg class="stars" role="img" aria-label="5 out of 5 stars" viewBox="0 0 92 17"><use href="#st"/><use href="#st" x="19"/><use href="#st" x="38"/><use href="#st" x="57"/><use href="#st" x="76"/></svg>
+      <blockquote>Full re-roof on our bungalow in six days. Skip gone, drive swept, and two neighbours asked for their number.</blockquote>
+      <p class="who"><b>Steve, Colehill</b><span class="tag">Sample review</span></p>
+    </article>
+    <article class="place" id="p-ferndown">
+      <h3>Ferndown</h3>
+      <svg class="stars" role="img" aria-label="5 out of 5 stars" viewBox="0 0 92 17"><use href="#st"/><use href="#st" x="19"/><use href="#st" x="38"/><use href="#st" x="57"/><use href="#st" x="76"/></svg>
+      <blockquote>Gutters and fascias done in a day and a half. The price on the quote was the price on the invoice.</blockquote>
+      <p class="who"><b>Priya, Ferndown</b><span class="tag">Sample review</span></p>
+    </article>
+    <article class="place" id="p-merley">
+      <h3>Merley</h3>
+      <p>Garage flat roof stripped and re-covered in a one-piece rubber membrane, with new drip trims.</p>
+      <p class="who"><b>Flat roof, from £1,800</b><span class="tag">Sample job</span></p>
+    </article>
+    <article class="place" id="p-corfe">
+      <h3>Corfe Mullen</h3>
+      <p>Chimney repointed and new lead flashing dressed round the stack after a damp patch showed upstairs.</p>
+      <p class="who"><b>Leadwork, from £250</b><span class="tag">Sample job</span></p>
+    </article>
+    <article class="place" id="p-parley">
+      <h3>West Parley</h3>
+      <p>Ridge tiles lifted in a gale. Sheeted and watertight the same evening, ridge dry-fixed that week.</p>
+      <p class="who"><b>Storm damage call-out</b><span class="tag">Sample job</span></p>
+    </article>
+    <article class="place" id="p-poole">
+      <h3>Poole</h3>
+      <p>Just south of our usual patch. Ring and ask, and we'll tell you straight if we can get to you.</p>
+    </article>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="qt-h"><div class="edge" aria-hidden="true"><i></i><svg viewBox="0 0 240 70" preserveAspectRatio="xMaxYMax meet"><path class="f" d="M0 3H60V20H120V37H180V54H240V70H0Z"/><path class="l" d="M0 3H60V20H120V37H180V54H240"/></svg></div><div class="wrap">
+  <div>
+    <h2 id="qt-h">Tell us what's wrong. We'll quote in writing.</h2>
+    <p class="pl">Call, WhatsApp or use this form. A photo from the garden helps. We look properly, from the ground or the scaffold, and put the price in writing before any work starts.</p>
+  </div>
+  <form id="quote" novalidate aria-labelledby="qt-h">
+    <fieldset>
+      <legend>What's the job?</legend>
+      <div class="opts">
+        <input type="radio" name="job" id="j1" value="Roof repair" checked><label for="j1">Repair</label>
+        <input type="radio" name="job" id="j2" value="Leak or storm damage"><label for="j2">Leak or storm</label>
+        <input type="radio" name="job" id="j3" value="Gutters and fascias"><label for="j3">Gutters</label>
+        <input type="radio" name="job" id="j4" value="Flat roof"><label for="j4">Flat roof</label>
+        <input type="radio" name="job" id="j5" value="Chimney or leadwork"><label for="j5">Chimney or lead</label>
+        <input type="radio" name="job" id="j6" value="Full re-roof"><label for="j6">Re-roof</label>
+      </div>
+    </fieldset>
+    <div><label class="f" for="qd">A few details</label><textarea id="qd" aria-describedby="qs" placeholder="For example: two tiles slipped above the back bedroom after the wind"></textarea></div>
+    <div><label class="f" for="qp">Postcode</label><input class="t" id="qp" autocomplete="postal-code" placeholder="BH21"></div>
+    <button class="send" type="submit">Write my WhatsApp message</button>
+    <p class="composed" id="qs" role="status" aria-live="polite"></p>
+  </form>
+</div></section>
+
+<section class="ask wrap" id="faq" aria-labelledby="fq-h">
+  <h2 id="fq-h">What people ask before we climb up</h2>
+  <div>
+    <details open><summary>Do you do insurance work?</summary><p>Yes. We photograph the damage, write a clear report and a quote you can send to your insurer, and make the roof watertight while they decide.</p></details>
+    <details><summary>Can you repair rather than replace?</summary><p>Usually, yes. Most roofs need a repair, not a new roof. We'll tell you honestly which yours needs, with photos from up there so you can see for yourself.</p></details>
+    <details><summary>How long does a re-roof take?</summary><p>A typical three-bed house takes five to eight working days, depending on the roof and the weather. It's sheeted and watertight every night.</p></details>
+    <details><summary>Do you guarantee your work?</summary><p>Yes. On a real site, this answer shows the firm's actual guarantee and scheme details so customers can check them. This firm is made up, so it says CompetentRoofer registered (example).</p></details>
+    <details><summary>Do you charge for quotes?</summary><p>No. Quotes are free within our area, in writing, usually within two days of the visit.</p></details>
+  </div>
+</section>
+</main>
+
+<section class="close" id="want" aria-labelledby="wt-h"><div class="edge" aria-hidden="true"><i></i><svg viewBox="0 0 240 70" preserveAspectRatio="xMaxYMax meet"><path class="f" d="M0 3H60V20H120V37H180V54H240V70H0Z"/><path class="l" d="M0 3H60V20H120V37H180V54H240"/></svg></div><div class="wrap">
+  <div>
+    <h2 id="wt-h">Like this site? Get one for your business</h2>
+  </div>
+  <div style="display:grid;gap:.9rem">
+    <p>This is an example built by Tom Fisher in St Leonards. One-page websites for local trades: built from your own reviews and photos, with a map of your own patch, hosted and kept up to date for you.</p>
+    <p class="price">£199 to build, then £10 a month</p>
+    <div class="reach">
+      <span>Call or WhatsApp Tom on <a href="tel:+447825630833">07825 630833</a></span>
+      <span><a href="mailto:tom.fisher.systems@gmail.com">tom.fisher.systems@gmail.com</a></span>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <span>Kestrel Roofing is a fictional business on a demo website.</span>
+  <span>Demo by Tom Fisher, St Leonards, Dorset.</span>
+</div></footer>
+
+<aside class="callbar" aria-label="Quick contact">
+  <a href="#quote" data-demo="call">Call</a>
+  <a href="#quote" data-demo="whatsapp">WhatsApp</a>
+</aside>
+<aside aria-label="Demo notices"><p class="demo-note" id="note" role="status" aria-live="polite"></p></aside>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="st" viewBox="0 0 16 17" width="16" height="17"><path fill="currentColor" d="M8 .8l2.3 5.1 5.5.6-4.1 3.7 1.2 5.5L8 13l-4.9 2.7 1.2-5.5L.2 6.5l5.5-.6z"/></symbol></svg>
+
+<script>
+(function(){
+  var note=document.getElementById('note'),t;
+  var msg={call:'Demo only. On a real site this rings the firm straight away. 01202 000000 is a placeholder.',whatsapp:'Demo only. On a real site this opens WhatsApp with the firm. Nothing is sent from here.'};
+  document.querySelectorAll('[data-demo]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      note.textContent=msg[a.getAttribute('data-demo')];
+      clearTimeout(t);t=setTimeout(function(){note.textContent='';},5000);
+    });
+  });
+
+  var fixes={
+    slipped:['Slipped or missing tile','One loose tile lets rain straight onto the felt, and the next storm takes its neighbours.','We slot a matching tile back in, fix it with a tile clip, and check the courses round it while we are up there.','Roof repairs from','£120','Roof repair','Ask about this repair'],
+    ridge:['Loose or cracked ridge','Old mortar crumbles, ridge tiles rock in the wind, and water runs in along the top of the roof.','We lift the ridge, clean it up and re-fix it with a dry-fix system, so there is no mortar left to wash out.','Roof repairs from','£120','Roof repair','Ask about the ridge'],
+    chimney:['Chimney and flaunching','Cracked pointing and crumbling mortar round the pots let water down inside the stack.','We repoint the stack, re-form the flaunching round the pots and fit cowls if you need them.','Chimney repairs from','£350','Chimney or leadwork','Ask about the chimney'],
+    gutters:['Gutters, fascias and soffits','Sagging gutters overflow, and rotten fascia boards let water into the wall below.','We replace the run in one go: new fascias, soffits, gutters and downpipes, colour-matched.','Gutters and fascias from','£450','Gutters and fascias','Ask about gutters'],
+    lead:['Lead where the porch meets the wall','A split or lifted lead flashing lets rain run behind it and down inside the wall.','We cut in and dress new lead to fit, then point it into the brickwork so it stays put.','Leadwork from','£250','Chimney or leadwork','Ask about leadwork'],
+    flat:['Flat roof on the extension','Felt roofs blister, crack and pond water, and leaks show up on the ceiling inside.','We strip it and re-cover it in a one-piece rubber or fibreglass membrane with new trims.','Flat roofs from','£1,800','Flat roof','Ask about the flat roof'],
+    reroof:['The whole roof is tired','Moss, porous tiles and slipping courses mean patching is money down the drain.','We strip it, fit new breathable membrane and battens, lay new tiles and dry-fix the ridge.','Full re-roof from','£7,500','Full re-roof','Ask about a re-roof']
+  };
+  var spotBtns=[].slice.call(document.querySelectorAll('[data-spot]'));
+  var fa=document.getElementById('fx-a');
+  function spot(k){
+    var f=fixes[k];
+    document.getElementById('fx-t').textContent=f[0];
+    document.getElementById('fx-p').textContent=f[1];
+    document.getElementById('fx-d').textContent=f[2];
+    document.getElementById('fx-l').textContent=f[3];
+    document.getElementById('fx-b').textContent=f[4];
+    fa.setAttribute('data-job',f[5]);fa.textContent=f[6];
+    spotBtns.forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-spot')===k?'true':'false');});
+  }
+  spotBtns.forEach(function(b){b.addEventListener('click',function(){spot(b.getAttribute('data-spot'));});});
+  fa.addEventListener('click',function(){
+    var v=fa.getAttribute('data-job');
+    document.querySelectorAll('input[name=job]').forEach(function(r){r.checked=r.value===v;});
+  });
+
+  var pins=[].slice.call(document.querySelectorAll('.pin')),places=[].slice.call(document.querySelectorAll('.place'));
+  function show(id){
+    places.forEach(function(p){p.hidden=p.id!==id;});
+    pins.forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-place')===id?'true':'false');});
+  }
+  pins.forEach(function(b){b.addEventListener('click',function(){show(b.getAttribute('data-place'));});});
+  show('p-wimborne');
+
+  var map=document.getElementById('map');
+  if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
+    var io=new IntersectionObserver(function(es){
+      if(es[0].isIntersecting){map.classList.add('draw');io.disconnect();}
+    },{threshold:.35});
+    io.observe(map);
+  }
+
+  var ba=document.getElementById('ba'),r=document.getElementById('ba-range');
+  function setPos(v){v=Math.max(0,Math.min(100,v));r.value=v;ba.style.setProperty('--pos',v+'%');}
+  r.addEventListener('input',function(){setPos(+r.value);});
+  var drag=false;
+  function fromEvent(e){var b=ba.getBoundingClientRect();setPos((e.clientX-b.left)/b.width*100);}
+  ba.addEventListener('pointerdown',function(e){drag=true;fromEvent(e);});
+  window.addEventListener('pointermove',function(e){if(drag)fromEvent(e);});
+  window.addEventListener('pointerup',function(){drag=false;});
+  window.addEventListener('pointercancel',function(){drag=false;});
+
+  var f=document.getElementById('quote'),s=document.getElementById('qs'),d=document.getElementById('qd'),pc=document.getElementById('qp');
+  d.addEventListener('input',function(){if(d.value.trim())d.removeAttribute('aria-invalid');});
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var txt=d.value.trim();
+    s.textContent='';
+    if(!txt){d.setAttribute('aria-invalid','true');s.textContent='Add a few details about the roof first, so the firm knows what to bring.';d.focus();return;}
+    d.removeAttribute('aria-invalid');
+    var job=f.querySelector('input[name=job]:checked').value,post=pc.value.trim();
+    s.appendChild(document.createTextNode('Nothing has been sent. On a real site, this opens WhatsApp with:'));
+    var q=document.createElement('q');q.textContent=job+': '+txt+(post?' ('+post+')':'');s.appendChild(q);
+  });
+})();
+</script>
+</body>
+</html>
